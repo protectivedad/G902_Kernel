@@ -15,7 +15,7 @@
 #define _FE_WANTED
 
 #include <linux/version.h>
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 /*
  * DEFINITIONS AND MACROS

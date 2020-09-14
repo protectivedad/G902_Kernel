@@ -9,7 +9,7 @@
 #include <linux/i2c.h>
 #include <linux/io.h>
 
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #include "i2c-ralink.h"
 
 static int i2c_id;

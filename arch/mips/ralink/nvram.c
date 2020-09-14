@@ -1,5 +1,5 @@
 #include <linux/version.h>
-#include <linux/autoconf.h>
+#include <generated/autoconf.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/types.h>

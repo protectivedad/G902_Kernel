@@ -1,4 +1,4 @@
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 #ifndef _RALINK_WDT_WANTED
 #define _RALINK_WDT_WANTED

@@ -34,7 +34,7 @@
 #ifndef __SPIDRV
 #define __SPIDRV
 
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 #define	RT2880_SPI_DUMP_STR		"dump"	/* Dump Content Command Prompt    */
 #define	RT2880_SPI_READ_STR		"read"	/* SPI read operation */

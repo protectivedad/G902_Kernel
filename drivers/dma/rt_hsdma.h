@@ -1,7 +1,7 @@
 #ifndef _RALINK_HSDMA
 #define _RALINK_HSDMA
 
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 
 #define NUM_HSDMA_RX_DESC     256

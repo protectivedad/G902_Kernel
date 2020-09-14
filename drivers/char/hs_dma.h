@@ -1,7 +1,7 @@
 #ifndef _RALINK_HSDMA
 #define _RALINK_HSDMA
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,0)
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #endif
 
 

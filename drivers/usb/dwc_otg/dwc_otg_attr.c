@@ -263,10 +263,10 @@
 #include <linux/version.h>
 
 //#include <asm/sizes.h>
-#include <asm/rt2880/sizes.h>
+#include <asm/mach-ralink/sizes.h>
 #include <asm/io.h>
 //#include <asm/arch/lm.h>
-#include <asm/rt2880/lm.h>
+#include <asm/mach-ralink/lm.h>
 
 #include "linux/dwc_otg_plat.h"
 #include "dwc_otg_attr.h"

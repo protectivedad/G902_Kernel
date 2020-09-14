@@ -17,7 +17,7 @@
 #include <asm/uaccess.h> /* copy_from/to_user */
 #include <linux/interrupt.h>
 #include <linux/mm.h>
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 #include <linux/pci.h>
 #include "../ralink_gdma.h"
 #if defined(CONFIG_I2S_WITH_AEC)

@@ -47,7 +47,7 @@
 #ifndef _TC3262SLIC_H
 #define _TC3262SLIC_H
 
-#include <linux/autoconf.h>
+#include <generated/autoconf.h>
 #include <asm/mach-ralink/rt_mmap.h>
 /*********************************
  * Return Values *

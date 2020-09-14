@@ -8,7 +8,7 @@
 #define PHYSADDR(a)		(((unsigned long)(a)) & 0x1fffffff)
 #endif
 #include <asm/io.h>
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #include "gdma.h"
 #include "ralink_nand.h"
 

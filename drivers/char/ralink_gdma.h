@@ -34,7 +34,7 @@
 #ifndef __RALINK_DMA_CTRL_H__
 #define __RALINK_DMA_CTRL_H__
 
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 /*
  * DEFINITIONS AND MACROS

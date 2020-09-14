@@ -45,7 +45,7 @@
 #include <asm/uaccess.h>
 #include "ralink_gpio.h"
 
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 
 #ifdef  CONFIG_DEVFS_FS
 #include <linux/devfs_fs_kernel.h>

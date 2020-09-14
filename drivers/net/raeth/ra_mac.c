@@ -22,7 +22,7 @@
 #include <asm/io.h>
 #include <asm/dma.h>
 
-#include <asm/rt2880/surfboardint.h>	/* for cp0 reg access, added by bobtseng */
+#include <asm/mach-ralink/surfboardint.h>	/* for cp0 reg access, added by bobtseng */
 
 #include <linux/errno.h>
 #include <linux/init.h>

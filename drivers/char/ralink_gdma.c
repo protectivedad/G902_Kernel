@@ -50,7 +50,7 @@
 #include <linux/fs.h>
 #include <asm/uaccess.h>
 #include <asm/addrspace.h>
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 
 #include "ralink_gdma.h"
 

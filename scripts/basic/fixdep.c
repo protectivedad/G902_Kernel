@@ -98,7 +98,7 @@
  * Note 2: if somebody writes HELLO_CONFIG_BOOM in a file, it will depend onto
  * CONFIG_BOOM. This could seem a bug (not too hard to fix), but please do not
  * fix it! Some UserModeLinux files (look at arch/um/) call CONFIG_BOOM as
- * UML_CONFIG_BOOM, to avoid conflicts with /usr/include/linux/autoconf.h,
+ * UML_CONFIG_BOOM, to avoid conflicts with /usr/include/generated/autoconf.h,
  * through arch/um/include/uml-config.h; this fixdep "bug" makes sure that
  * those files will have correct dependencies.
  */

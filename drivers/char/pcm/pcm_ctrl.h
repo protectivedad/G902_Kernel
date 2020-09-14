@@ -9,7 +9,7 @@
 #include <linux/kernel.h>
 #include <linux/interrupt.h>
 #include <linux/ioctl.h>
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 #include "./codec_lib/codec_api.h"
 

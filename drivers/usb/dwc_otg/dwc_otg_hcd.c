@@ -51,7 +51,7 @@
 #include <linux/version.h>
 
 //#include <asm/arch/lm.h>
-#include <asm/rt2880/lm.h>
+#include <asm/mach-ralink/lm.h>
 //#include <asm/arch/irqs.h>
 
 #include "dwc_otg_driver.h"

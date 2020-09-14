@@ -53,7 +53,7 @@
 #include <asm/system.h>
 #endif
 #include <asm/uaccess.h>
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 #include <linux/interrupt.h>
 #include "rt_timer.h"
 

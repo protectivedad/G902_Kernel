@@ -8,7 +8,7 @@
 #include <linux/interrupt.h>
 #include <linux/platform_device.h>
 #include <linux/memory.h>
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 #if LINUX_VERSION_CODE > KERNEL_VERSION(3,10,0)
 #include <linux/version.h>
 #endif

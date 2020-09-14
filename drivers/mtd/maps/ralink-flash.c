@@ -22,7 +22,7 @@
 #include <linux/mtd/partitions.h>
 #include <asm/addrspace.h>
 #include "ralink-flash.h"
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 
 
 #if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,36)

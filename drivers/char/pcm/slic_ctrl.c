@@ -55,7 +55,7 @@
  */
 //#include <asm/semaphore.h>
 #include <linux/semaphore.h>
-#include <linux/autoconf.h>
+#include <generated/autoconf.h>
 #include <linux/param.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>

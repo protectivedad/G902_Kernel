@@ -2,7 +2,7 @@
 #define __SPIC_H__
 
 #if !defined (__UBOOT__)
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #include <linux/version.h>
 
 #define RT2880_RSTCTRL_REG		(RALINK_SYSCTL_BASE+0x34)

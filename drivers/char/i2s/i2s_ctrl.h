@@ -2,7 +2,7 @@
 #define __RALINK_I2S_H_
 
 #ifdef __KERNEL__
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #endif
 
 #if defined(CONFIG_I2S_WITH_AEC)

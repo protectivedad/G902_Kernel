@@ -33,7 +33,7 @@
  * applicable license agreements with MediaTek Inc.
  */
 
-#include <linux/autoconf.h>
+#include <generated/autoconf.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>
@@ -59,7 +59,7 @@
 #include <linux/kernel.h>
 #include <linux/version.h>
 #include <linux/pm.h>
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 
 #define MSDC_SMPL_FALLING   (1)
 #define MSDC_CD_PIN_EN      (1 << 0)  /* card detection pin is wired   */
@@ -72,7 +72,7 @@
 #define IRQ_SDC SURFBOARDINT_SDXC	/*FIXME*/
 
 #include <asm/dma.h>
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 /* end of +++ */
 
 #if 0 /* --- by chhung */

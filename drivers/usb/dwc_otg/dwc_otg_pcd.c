@@ -76,7 +76,7 @@
 
 //#include <asm/arch/lm.h>
 //#include <asm/arch/irqs.h>
-#include <asm/rt2880/lm.h>
+#include <asm/mach-ralink/lm.h>
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,21)
 # include <linux/usb/ch9.h>

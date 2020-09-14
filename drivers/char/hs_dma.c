@@ -9,11 +9,11 @@
 #include <linux/fs.h>
 #include <linux/interrupt.h>
 #include <asm/uaccess.h>
-#include <asm/rt2880/surfboardint.h>
+#include <asm/mach-ralink/surfboardint.h>
 
 
 #if LINUX_VERSION_CODE > KERNEL_VERSION(2,6,0)
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #else
 #include <linux/libata-compat.h>
 #endif

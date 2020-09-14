@@ -1,7 +1,7 @@
 #ifndef _MTK_AES_ENGINE
 #define _MTK_AES_ENGINE
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,0)
-#include <asm/rt2880/rt_mmap.h>
+#include <asm/mach-ralink/rt_mmap.h>
 #endif
 
 #define MOD_VERSION_AES_ENGINE 			"0.1"
