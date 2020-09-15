@@ -445,6 +445,8 @@ static struct mtd_part *add_one_partition(struct mtd_info *master,
 	}
 	if (slave->mtd.size == MTDPART_SIZ_FULL)
 		slave->mtd.size = master->size - slave->offset;
+	if (slave->mtd.size == MTDPART_SIZ_ZERO)
+		slave->mtd.size = 0;
 
 	printk(KERN_NOTICE "0x%012llx-0x%012llx : \"%s\"\n", (unsigned long long)slave->offset,
 		(unsigned long long)(slave->offset + slave->mtd.size), slave->mtd.name);

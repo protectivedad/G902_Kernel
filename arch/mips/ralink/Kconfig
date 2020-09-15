@@ -335,7 +335,7 @@ config  RT2880_ROOTFS_IN_RAM
 
 config  RT2880_ROOTFS_IN_FLASH
         bool "RootFS_in_FLASH"
-	depends on RALINK_MT7628
+	depends on RALINK_MT7628 || RALINK_MT7621
 endchoice
 
 config BLK_DEV_RAM_SIZE

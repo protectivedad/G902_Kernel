@@ -45,7 +45,7 @@ struct mtd_partition {
 #define MTDPART_OFS_NXTBLK	(-2)
 #define MTDPART_OFS_APPEND	(-1)
 #define MTDPART_SIZ_FULL	(0)
-
+#define MTDPART_SIZ_ZERO	(-1)
 
 struct mtd_info;
 

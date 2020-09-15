@@ -79,7 +79,7 @@ static struct mtd_partition rt2880_partitions[] = {
                 size:           MTD_BOOT_PART_SIZE,
                 offset:         0,
         }, {
-                name:           "Config",
+                name:           "Mac",
                 size:           MTD_CONFIG_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND
         }, {
@@ -87,19 +87,20 @@ static struct mtd_partition rt2880_partitions[] = {
                 size:           MTD_FACTORY_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND
 #ifdef CONFIG_RT2880_ROOTFS_IN_FLASH
+#ifdef CONFIG_ROOTFS_IN_FLASH_NO_PADDING
+        }, {
+                name:           "Kernel_RootFs",
+                size:           MTD_ROOTFS_PART_SIZE,
+                offset:         MTD_KERN_PART_OFFSET,
+#elif
         }, {
                 name:           "Kernel",
                 size:           MTD_KERN_PART_SIZE,
-                offset:         MTDPART_OFS_APPEND,
+                offset:         MTD_KERN_PART_OFFSET,
         }, {
                 name:           "RootFS",
                 size:           MTD_ROOTFS_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
-#ifdef CONFIG_ROOTFS_IN_FLASH_NO_PADDING
-        }, {
-                name:           "Kernel_RootFS",
-                size:           MTD_KERN_PART_SIZE + MTD_ROOTFS_PART_SIZE,
-                offset:         MTD_BOOT_PART_SIZE + MTD_CONFIG_PART_SIZE + MTD_FACTORY_PART_SIZE,
 #endif
 #else //CONFIG_RT2880_ROOTFS_IN_RAM
         }, {
@@ -109,16 +110,44 @@ static struct mtd_partition rt2880_partitions[] = {
 #endif
 #ifdef CONFIG_DUAL_IMAGE
         }, {
-                name:           "Kernel2",
-                size:           MTD_KERN2_PART_SIZE,
+                name:           "Kernel_bak",
+                size:           MTD_KERN_PART_SIZE,
                 offset:         MTD_KERN2_PART_OFFSET,
 #ifdef CONFIG_RT2880_ROOTFS_IN_FLASH
         }, {
-                name:           "RootFS2",
-                size:           MTD_ROOTFS2_PART_SIZE,
-                offset:         MTD_ROOTFS2_PART_OFFSET,
+                name:           "RootFs_bak",
+                size:           MTD_ROOTFS_PART_SIZE,
+                offset:         MTDPART_OFS_APPEND,
 #endif
 #endif
+        }, {
+                name:           "Kernel_RootFs",
+                size:           MTD_KERN_PART_SIZE + MTD_ROOTFS_PART_SIZE,
+                offset:         MTD_KERN_PART_OFFSET,
+#ifdef CONFIG_DUAL_IMAGE
+        }, {
+                name:           "Kernel_RootFs_bak",
+                size:           MTD_KERN_PART_SIZE + MTD_ROOTFS_PART_SIZE,
+                offset:         MTD_KERN2_PART_OFFSET,
+#endif
+        }, {
+                name:           "SystemLog",
+                size:           MTD_SYSLOG_PART_SIZE,
+                offset:         MTDPART_OFS_APPEND,
+        }, {
+                name:           "Config",
+                size:           MTD_NVRAM_PART_SIZE,
+                offset:         MTDPART_OFS_APPEND,
+#ifdef CONFIG_DUAL_IMAGE
+        }, {
+                name:           "Config_bak",
+                size:           MTD_NVRAM_PART_SIZE,
+                offset:         MTDPART_OFS_APPEND,
+#endif
+        }, {
+                name:           "Mac_bak",
+                size:           MTD_CONFIG_PART_SIZE,
+                offset:         MTDPART_OFS_APPEND
         }
 };
 
