@@ -1242,25 +1242,25 @@ static int ramtd_read(struct mtd_info *mtd, loff_t from, size_t len,
 }
 
 #if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,22)
-inline int ramtd_lock (struct mtd_info *mtd, loff_t to, size_t len)
+static inline int ramtd_lock (struct mtd_info *mtd, loff_t to, size_t len)
 {
 	return 0; // Not all vendor support lock/unlock cmd
 	//return raspi_set_lock(mtd, to, len, 1);
 }
 
-inline int ramtd_unlock (struct mtd_info *mtd, loff_t to, size_t len)
+static inline int ramtd_unlock (struct mtd_info *mtd, loff_t to, size_t len)
 {
 	return 0; // Not all vendor support lock/unlock cmd
 	//return raspi_set_lock(mtd, to, len, 0);
 }
 #else
-inline int ramtd_lock (struct mtd_info *mtd, loff_t to, uint64_t len)
+static inline int ramtd_lock (struct mtd_info *mtd, loff_t to, uint64_t len)
 {
 	return 0; // Not all vendor support lock/unlock cmd
 	//return raspi_set_lock(mtd, to, len, 1);
 }
 
-inline int ramtd_unlock (struct mtd_info *mtd, loff_t to, uint64_t len)
+static inline int ramtd_unlock (struct mtd_info *mtd, loff_t to, uint64_t len)
 {
 	return 0; // Not all vendor support lock/unlock cmd
 	//return raspi_set_lock(mtd, to, len, 0);

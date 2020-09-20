@@ -1376,13 +1376,13 @@ static int ramtd_read(struct mtd_info *mtd, loff_t from, size_t len,
 	return 0;
 }
 
-inline int ramtd_lock (struct mtd_info *mtd, loff_t to, uint64_t len)
+static inline int ramtd_lock (struct mtd_info *mtd, loff_t to, uint64_t len)
 {
 	//return raspi_set_lock(mtd, to, len, 1);
 	return 0;
 }
 
-inline int ramtd_unlock (struct mtd_info *mtd, loff_t to, uint64_t len)
+static inline int ramtd_unlock (struct mtd_info *mtd, loff_t to, uint64_t len)
 {
 	//return raspi_set_lock(mtd, to, len, 0);
 	return 0;
