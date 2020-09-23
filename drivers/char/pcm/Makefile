@@ -1,8 +1,8 @@
 EXTRA_CFLAGS = -Idrivers/char
 
 CONFIG_SLIC_DRIVER := y
-CONFIG_SLIC_SI3226X := y
-#CONFIG_SLIC_SI32176 := y
+#CONFIG_SLIC_SI3226X := y
+CONFIG_SLIC_SI32176 := y
 #CONFIG_SLIC_SI3226 := y
 EXTRA_CFLAGS+=-DSLIC_SILICON
 #EXTRA_CFLAGS+=-DPCM_LOOPBACK_TEST
@@ -35,7 +35,8 @@ SRC_OBJ +=	./$(PROSLIC_API)/patch_files/si3226_patch_C_QCUK_2010AUG10.o \
 			./$(PROSLIC_API)/patch_files/si3226_patch_E_FLBK_2010AUG10.o
 endif			
 ifeq ($(CONFIG_SLIC_SI32176),y)
-SRC_OBJ += ./$(PROSLIC_API)/patch_files/si3217x_patch_B_BB_2012DEC10.o
+SRC_OBJ += ./$(PROSLIC_API)/patch_files/si3217x_patch_B_BB_2012DEC10.o \
+		./$(PROSLIC_API)/patch_files/si3217x_patch_C_FB_2013FEB04.o
 endif
 ifeq ($(CONFIG_SLIC_SI3226X),y)
 SRC_OBJ += ./$(PROSLIC_API)/patch_files/si3226x_patch_C_TSS_ISO_2012DEC06.o
