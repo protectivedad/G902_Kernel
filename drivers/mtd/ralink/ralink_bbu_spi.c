@@ -89,13 +89,6 @@ static struct mtd_partition rt2880_partitions[] = {
                 name:           "Factory",
                 size:           MTD_FACTORY_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND
-#ifdef CONFIG_RT2880_ROOTFS_IN_FLASH
-#ifdef CONFIG_ROOTFS_IN_FLASH_NO_PADDING
-        }, {
-                name:           "Kernel_RootFs",
-                size:           MTD_ROOTFS_PART_SIZE,
-                offset:         MTD_KERN_PART_OFFSET,
-#else
         }, {
                 name:           "Kernel",
                 size:           MTD_KERN_PART_SIZE,
@@ -104,39 +97,34 @@ static struct mtd_partition rt2880_partitions[] = {
                 name:           "RootFs",
                 size:           MTD_ROOTFS_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
-#endif
-#else //CONFIG_RT2880_ROOTFS_IN_RAM
         }, {
-                name:           "Kernel",
-                size:           MTD_KERN_PART_SIZE,
-                offset:         MTDPART_OFS_APPEND,
-#endif
-#ifdef CONFIG_DUAL_IMAGE
+                name:           "RootFS_Ext",
+                size:           MTDPART_SIZ_ZERO,
+                offset:         MTDPART_OFS_APPEND, // FOR ORDERING
         }, {
                 name:           "Kernel_bak",
                 size:           MTD_KERN_PART_SIZE,
                 offset:         MTD_KERN2_PART_OFFSET,
-#ifdef CONFIG_RT2880_ROOTFS_IN_FLASH
         }, {
                 name:           "RootFs_bak",
                 size:           MTD_ROOTFS_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
-#endif
-#endif
         }, {
                 name:           "Kernel_RootFs",
                 size:           MTD_KERN_PART_SIZE + MTD_ROOTFS_PART_SIZE,
                 offset:         MTD_KERN_PART_OFFSET,
-#ifdef CONFIG_DUAL_IMAGE
         }, {
                 name:           "Kernel_RootFs_bak",
                 size:           MTD_KERN_PART_SIZE + MTD_ROOTFS_PART_SIZE,
                 offset:         MTD_KERN2_PART_OFFSET,
-#endif
         }, {
                 name:           "RootFS_Data",
                 size:           MTDPART_SIZ_ZERO,
                 offset:         MTDPART_OFS_APPEND, // FOR ORDERING
+        }, {
+                name:           "Image_All",
+                size:           ( MTD_KERN_PART_SIZE + MTD_ROOTFS_PART_SIZE ) * 2,
+                offset:         MTD_KERN_PART_OFFSET,
         }, {
                 name:           "SystemLog",
                 size:           MTD_SYSLOG_PART_SIZE,
@@ -145,12 +133,10 @@ static struct mtd_partition rt2880_partitions[] = {
                 name:           "Config",
                 size:           MTD_NVRAM_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
-#ifdef CONFIG_DUAL_IMAGE
         }, {
                 name:           "Config_bak",
                 size:           MTD_NVRAM_PART_SIZE,
                 offset:         MTDPART_OFS_APPEND,
-#endif
         }, {
                 name:           "Mac_bak",
                 size:           MTD_CONFIG_PART_SIZE,
