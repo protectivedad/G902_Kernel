@@ -46,14 +46,14 @@ void fv_mtd_only_erase(void)
 }
 EXPORT_SYMBOL(fv_mtd_only_erase);
 
-static void __exit mtdoops_exit(void)
+static void __exit mtdfake_exit(void)
 {
 	printk(KERN_INFO "mtdfake: fake symbols destroyed\n");
 }
 
 
-module_init(mtdoops_init);
-module_exit(mtdoops_exit);
+module_init(mtdfake_init);
+module_exit(mtdfake_exit);
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Protective Dad <protectivedad@nomail.com>");

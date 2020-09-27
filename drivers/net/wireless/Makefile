@@ -53,6 +53,20 @@ obj-$(CONFIG_WL12XX)	+= wl12xx/
 
 obj-$(CONFIG_IWM)	+= iwmc3200wifi/
 
+ifneq ($(CONFIG_WIFI_PKT_FWD),)
+ifneq ($(CONFIG_WIFI_PKT_FWD_V1),)
+obj-y                   += wifi_forward/wifi_hook_v1/
+else
+obj-y                   += wifi_forward/wifi_hook/
+endif
+endif
+
+ifneq ($(CONFIG_WIFI_PKT_FWD_V1),)
+obj-$(CONFIG_WIFI_PKT_FWD)       += wifi_forward/wifi_fwd_v1/
+else
+obj-$(CONFIG_WIFI_PKT_FWD)       += wifi_forward/wifi_fwd/
+endif
+
 ifneq ($(CONFIG_RT2860V2_AP),)
 obj-$(CONFIG_RT2860V2_AP)       += rt2860v2_ap/
 endif
@@ -71,6 +85,11 @@ endif
 ifneq ($(CONFIG_MT_STA_SUPPORT),)
 obj-$(CONFIG_MT_STA_SUPPORT)      += mt_wifi_sta/
 endif
+#ifneq ($(CONFIG_WIFI_PKT_FWD),)
+#obj-y                         += wifi_forward/wifi_hook/
+#endif
+#obj-$(CONFIG_WIFI_PKT_FWD)       += wifi_forward/wifi_fwd/
+
 ifneq ($(CONFIG_RTPCI_AP),)
 obj-$(CONFIG_RTPCI_AP)      	+= RTPCI_ap/
 endif

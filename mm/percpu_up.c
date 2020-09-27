@@ -18,6 +18,9 @@ void __percpu *__alloc_percpu(size_t size, size_t align)
 }
 EXPORT_SYMBOL_GPL(__alloc_percpu);
 
+unsigned long __per_cpu_offset[1] __read_mostly;
+EXPORT_SYMBOL(__per_cpu_offset);
+
 void free_percpu(void __percpu *p)
 {
 	kfree(this_cpu_ptr(p));

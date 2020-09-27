@@ -936,7 +936,6 @@ int del_timer(struct timer_list *timer)
 }
 EXPORT_SYMBOL(del_timer);
 
-#ifdef CONFIG_SMP
 /**
  * try_to_del_timer_sync - Try to deactivate a timer
  * @timer: timer do del
@@ -1009,7 +1008,6 @@ int del_timer_sync(struct timer_list *timer)
 	}
 }
 EXPORT_SYMBOL(del_timer_sync);
-#endif
 
 static int cascade(struct tvec_base *base, struct tvec *tv, int index)
 {
