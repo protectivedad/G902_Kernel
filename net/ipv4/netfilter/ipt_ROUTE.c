@@ -355,12 +355,12 @@ static unsigned int ipt_route_target (struct sk_buff *skb,
 
 	if ((route_info->flags & IPT_ROUTE_TEE)) {
 		/*
-		 * Copy the *pskb, and route the copy. Will later return
+		 * Copy the pskb, and route the copy. Will later return
 		 * IPT_CONTINUE for the original skb, which should continue
 		 * on its way as if nothing happened. The copy should be
 		 * independantly delivered to the ROUTE --gw.
 		 */
-		skb = skb_copy(*pskb, GFP_ATOMIC);
+		skb = pskb_copy(skb, GFP_ATOMIC);
 		if (!skb) {
 			if (net_ratelimit()) 
 				DEBUGP(KERN_DEBUG "ipt_ROUTE: copy failed!\n");
