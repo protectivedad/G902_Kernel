@@ -1,5 +1,5 @@
 #ifndef __LINUX_COMPILER_H
-#error "Please don't include <linux/compiler-gcc5.h> directly, include <linux/compiler.h> instead."
+#error "Please don't include <linux/compiler-gcc7.h> directly, include <linux/compiler.h> instead."
 #endif
 
 #define __used				__attribute__((__used__))
@@ -70,3 +70,4 @@
 #define __HAVE_BUILTIN_BSWAP64__
 #define __HAVE_BUILTIN_BSWAP16__
 #endif /* CONFIG_ARCH_USE_BUILTIN_BSWAP */
+
