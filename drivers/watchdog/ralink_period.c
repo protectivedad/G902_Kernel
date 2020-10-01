@@ -14,7 +14,7 @@ void timer_handler(unsigned long data)
     struct timeval tv;
     do_gettimeofday(&tv);
 
-    printk("Get timer0 periodic interrupt at  %02lu.%06lu\n", tv.tv_sec % 100, tv.tv_usec);
+//    printk("Get timer0 periodic interrupt at  %02lu.%06lu\n", tv.tv_sec % 100, tv.tv_usec);
 }
 
 #if !defined (CONFIG_RALINK_TIMER_WDG) && !defined (CONFIG_RALINK_TIMER_WDG_MODULE)
@@ -24,7 +24,7 @@ void timer1_handler(unsigned long data)
     struct timeval tv;
     do_gettimeofday(&tv);
 
-    printk("Get timer1 periodic interrupt at  %02lu.%06lu\n", tv.tv_sec % 100, tv.tv_usec);
+//    printk("Get timer1 periodic interrupt at  %02lu.%06lu\n", tv.tv_sec % 100, tv.tv_usec);
 }
 #endif
 
@@ -35,7 +35,7 @@ void timer2_handler(unsigned long data)
     struct timeval tv;
     do_gettimeofday(&tv);
 
-    printk("Get timer2 periodic interrupt at  %02lu.%06lu\n", tv.tv_sec % 100, tv.tv_usec);
+//    printk("Get timer2 periodic interrupt at  %02lu.%06lu\n", tv.tv_sec % 100, tv.tv_usec);
 }
 #endif
 
