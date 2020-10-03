@@ -75,7 +75,7 @@
 #include <net/ipv6.h>
 #include <net/inet_common.h>
 
-#include <linux/socket.h> /* for sa_family_t */
+#include <linux/socket.h> /* for __kernel_sa_family_t */
 #include <net/sock.h>
 #include <net/sctp/sctp.h>
 #include <net/sctp/sm.h>
@@ -916,7 +916,7 @@ SCTP_STATIC int sctp_setsockopt_bindx(struct sock* sk,
 	/* Walk through the addrs buffer and count the number of addresses. */
 	addr_buf = kaddrs;
 	while (walk_size < addrs_size) {
-		if (walk_size + sizeof(sa_family_t) > addrs_size) {
+		if (walk_size + sizeof(__kernel_sa_family_t) > addrs_size) {
 			kfree(kaddrs);
 			return -EINVAL;
 		}
@@ -1007,7 +1007,7 @@ static int __sctp_connect(struct sock* sk,
 	/* Walk through the addrs buffer and count the number of addresses. */
 	addr_buf = kaddrs;
 	while (walk_size < addrs_size) {
-		if (walk_size + sizeof(sa_family_t) > addrs_size) {
+		if (walk_size + sizeof(__kernel_sa_family_t) > addrs_size) {
 			err = -EINVAL;
 			goto out_free;
 		}

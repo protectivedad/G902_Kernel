@@ -35,7 +35,7 @@
 
 /* SCO socket address */
 struct sockaddr_sco {
-	sa_family_t	sco_family;
+	__kernel_sa_family_t	sco_family;
 	bdaddr_t	sco_bdaddr;
 };
 

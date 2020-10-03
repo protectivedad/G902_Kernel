@@ -1372,14 +1372,14 @@ enum tcp_seq_states {
 
 struct tcp_seq_afinfo {
 	char			*name;
-	sa_family_t		family;
+	__kernel_sa_family_t		family;
 	struct file_operations	seq_fops;
 	struct seq_operations	seq_ops;
 };
 
 struct tcp_iter_state {
 	struct seq_net_private	p;
-	sa_family_t		family;
+	__kernel_sa_family_t		family;
 	enum tcp_seq_states	state;
 	struct sock		*syn_wait_sk;
 	int			bucket, offset, sbucket, num, uid;

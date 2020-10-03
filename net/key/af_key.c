@@ -573,7 +573,7 @@ static uint8_t pfkey_proto_from_xfrm(uint8_t proto)
 	return (proto ? proto : IPSEC_PROTO_ANY);
 }
 
-static inline int pfkey_sockaddr_len(sa_family_t family)
+static inline int pfkey_sockaddr_len(__kernel_sa_family_t family)
 {
 	switch (family) {
 	case AF_INET:
@@ -656,7 +656,7 @@ static struct  xfrm_state *pfkey_xfrm_state_lookup(struct net *net, struct sadb_
 #define PFKEY_ALIGN8(a) (1 + (((a) - 1) | (8 - 1)))
 
 static int
-pfkey_sockaddr_size(sa_family_t family)
+pfkey_sockaddr_size(__kernel_sa_family_t family)
 {
 	return PFKEY_ALIGN8(pfkey_sockaddr_len(family));
 }
@@ -2381,7 +2381,7 @@ out:
 }
 
 #ifdef CONFIG_NET_KEY_MIGRATE
-static int pfkey_sockaddr_pair_size(sa_family_t family)
+static int pfkey_sockaddr_pair_size(__kernel_sa_family_t family)
 {
 	return PFKEY_ALIGN8(pfkey_sockaddr_len(family) * 2);
 }

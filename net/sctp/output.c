@@ -54,7 +54,7 @@
 #include <net/icmp.h>
 #include <net/net_namespace.h>
 
-#include <linux/socket.h> /* for sa_family_t */
+#include <linux/socket.h> /* for __kernel_sa_family_t */
 #include <net/sock.h>
 
 #include <net/sctp/sctp.h>

@@ -24,7 +24,7 @@
 #ifndef _AF_IEEE802154_H
 #define _AF_IEEE802154_H
 
-#include <linux/socket.h> /* for sa_family_t */
+#include <linux/socket.h> /* for __kernel_sa_family_t */
 
 enum {
 	IEEE802154_ADDR_NONE = 0x0,
@@ -50,7 +50,7 @@ struct ieee802154_addr {
 #define IEEE802154_ADDR_UNDEF		0xfffe
 
 struct sockaddr_ieee802154 {
-	sa_family_t family; /* AF_IEEE802154 */
+	__kernel_sa_family_t family; /* AF_IEEE802154 */
 	struct ieee802154_addr addr;
 };
 

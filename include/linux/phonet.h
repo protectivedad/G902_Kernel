@@ -93,11 +93,11 @@ struct phonetmsg {
 
 /* Phonet socket address structure */
 struct sockaddr_pn {
-	sa_family_t spn_family;
+	__kernel_sa_family_t spn_family;
 	__u8 spn_obj;
 	__u8 spn_dev;
 	__u8 spn_resource;
-	__u8 spn_zero[sizeof(struct sockaddr) - sizeof(sa_family_t) - 3];
+	__u8 spn_zero[sizeof(struct sockaddr) - sizeof(__kernel_sa_family_t) - 3];
 } __attribute__((packed));
 
 /* Well known address */

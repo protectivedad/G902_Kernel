@@ -69,7 +69,7 @@ struct rxrpc_sock {
 	u32			min_sec_level;	/* minimum security level */
 #define RXRPC_SECURITY_MAX	RXRPC_SECURITY_ENCRYPT
 	struct sockaddr_rxrpc	srx;		/* local address */
-	sa_family_t		proto;		/* protocol created with */
+	__kernel_sa_family_t		proto;		/* protocol created with */
 	__be16			service_id;	/* service ID of local/remote service */
 };
 

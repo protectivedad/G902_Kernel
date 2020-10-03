@@ -286,7 +286,7 @@ solution for a couple of reasons:
   PF_PACKET socket, that also binds to a specific interface:
 
     struct sockaddr_can {
-            sa_family_t can_family;
+            __kernel_sa_family_t can_family;
             int         can_ifindex;
             union {
                     /* transport protocol class address info (e.g. ISOTP) */

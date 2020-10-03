@@ -28,7 +28,7 @@
 
 #include <linux/skbuff.h>		/* struct sk_buff */
 #include <linux/kernel.h>
-#include <linux/if.h>			/* sa_family_t in <linux/irda.h> */
+#include <linux/if.h>			/* __kernel_sa_family_t in <linux/irda.h> */
 #include <linux/irda.h>
 
 typedef __u32 magic_t;

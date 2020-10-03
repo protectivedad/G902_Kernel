@@ -73,7 +73,7 @@ static int rxrpc_create_local(struct rxrpc_local *local)
 	}
 
 	/* if a local address was supplied then bind it */
-	if (local->srx.transport_len > sizeof(sa_family_t)) {
+	if (local->srx.transport_len > sizeof(__kernel_sa_family_t)) {
 		_debug("bind");
 		ret = kernel_bind(local->socket,
 				  (struct sockaddr *) &local->srx.transport,

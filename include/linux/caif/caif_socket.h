@@ -144,7 +144,7 @@ enum caif_debug_service {
  * CAIF Channel. It defines the service to connect to on the modem.
  */
 struct sockaddr_caif {
-	sa_family_t  family;
+	__kernel_sa_family_t  family;
 	union {
 		struct {
 			__u8  type;		/* type: enum caif_at_type */

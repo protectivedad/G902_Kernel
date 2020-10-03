@@ -762,7 +762,7 @@ static void sctp_inet6_skb_msgname(struct sk_buff *skb, char *msgname,
 }
 
 /* Do we support this AF? */
-static int sctp_inet6_af_supported(sa_family_t family, struct sctp_sock *sp)
+static int sctp_inet6_af_supported(__kernel_sa_family_t family, struct sctp_sock *sp)
 {
 	switch (family) {
 	case AF_INET6:

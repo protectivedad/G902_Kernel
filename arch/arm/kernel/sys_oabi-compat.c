@@ -366,7 +366,7 @@ asmlinkage int sys_oabi_ipc(uint call, int first, int second, int third,
 
 asmlinkage long sys_oabi_bind(int fd, struct sockaddr __user *addr, int addrlen)
 {
-	sa_family_t sa_family;
+	__kernel_sa_family_t sa_family;
 	if (addrlen == 112 &&
 	    get_user(sa_family, &addr->sa_family) == 0 &&
 	    sa_family == AF_UNIX)
@@ -376,7 +376,7 @@ asmlinkage long sys_oabi_bind(int fd, struct sockaddr __user *addr, int addrlen)
 
 asmlinkage long sys_oabi_connect(int fd, struct sockaddr __user *addr, int addrlen)
 {
-	sa_family_t sa_family;
+	__kernel_sa_family_t sa_family;
 	if (addrlen == 112 &&
 	    get_user(sa_family, &addr->sa_family) == 0 &&
 	    sa_family == AF_UNIX)
@@ -389,7 +389,7 @@ asmlinkage long sys_oabi_sendto(int fd, void __user *buff,
 				struct sockaddr __user *addr,
 				int addrlen)
 {
-	sa_family_t sa_family;
+	__kernel_sa_family_t sa_family;
 	if (addrlen == 112 &&
 	    get_user(sa_family, &addr->sa_family) == 0 &&
 	    sa_family == AF_UNIX)
@@ -401,7 +401,7 @@ asmlinkage long sys_oabi_sendmsg(int fd, struct msghdr __user *msg, unsigned fla
 {
 	struct sockaddr __user *addr;
 	int msg_namelen;
-	sa_family_t sa_family;
+	__kernel_sa_family_t sa_family;
 	if (msg &&
 	    get_user(msg_namelen, &msg->msg_namelen) == 0 &&
 	    msg_namelen == 112 &&

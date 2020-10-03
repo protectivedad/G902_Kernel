@@ -119,8 +119,8 @@ extern void sctp_local_addr_free(struct rcu_head *head);
 extern int sctp_copy_local_addr_list(struct sctp_bind_addr *,
 				     sctp_scope_t, gfp_t gfp,
 				     int flags);
-extern struct sctp_pf *sctp_get_pf_specific(sa_family_t family);
-extern int sctp_register_pf(struct sctp_pf *, sa_family_t);
+extern struct sctp_pf *sctp_get_pf_specific(__kernel_sa_family_t family);
+extern int sctp_register_pf(struct sctp_pf *, __kernel_sa_family_t);
 
 /*
  * sctp/socket.c

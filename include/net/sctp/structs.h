@@ -612,18 +612,18 @@ struct sctp_af {
 	void		(*ecn_capable)(struct sock *sk);
 	__u16		net_header_len;
 	int		sockaddr_len;
-	sa_family_t	sa_family;
+	__kernel_sa_family_t	sa_family;
 	struct list_head list;
 };
 
-struct sctp_af *sctp_get_af_specific(sa_family_t);
+struct sctp_af *sctp_get_af_specific(__kernel_sa_family_t);
 int sctp_register_af(struct sctp_af *);
 
 /* Protocol family functions. */
 struct sctp_pf {
 	void (*event_msgname)(struct sctp_ulpevent *, char *, int *);
 	void (*skb_msgname)  (struct sk_buff *, char *, int *);
-	int  (*af_supported) (sa_family_t, struct sctp_sock *);
+	int  (*af_supported) (__kernel_sa_family_t, struct sctp_sock *);
 	int  (*cmp_addr) (const union sctp_addr *,
 			  const union sctp_addr *,
 			  struct sctp_sock *);

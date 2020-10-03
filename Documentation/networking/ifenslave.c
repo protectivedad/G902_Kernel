@@ -385,7 +385,7 @@ int main(int argc, char *argv[])
 
 	/* Only for enslaving */
 	if (!opt_c && !opt_d) {
-		sa_family_t master_family = master_hwaddr.ifr_hwaddr.sa_family;
+		__kernel_sa_family_t master_family = master_hwaddr.ifr_hwaddr.sa_family;
 		unsigned char *hwaddr =
 			(unsigned char *)master_hwaddr.ifr_hwaddr.sa_data;
 

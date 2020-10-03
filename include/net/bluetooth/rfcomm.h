@@ -285,7 +285,7 @@ static inline void rfcomm_session_hold(struct rfcomm_session *s)
 
 /* ---- RFCOMM sockets ---- */
 struct sockaddr_rc {
-	sa_family_t	rc_family;
+	__kernel_sa_family_t	rc_family;
 	bdaddr_t	rc_bdaddr;
 	u8		rc_channel;
 };

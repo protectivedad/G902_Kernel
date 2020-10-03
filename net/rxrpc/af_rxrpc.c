@@ -90,7 +90,7 @@ static int rxrpc_validate_address(struct rxrpc_sock *rx,
 		return -ESOCKTNOSUPPORT;
 
 	len -= offsetof(struct sockaddr_rxrpc, transport);
-	if (srx->transport_len < sizeof(sa_family_t) ||
+	if (srx->transport_len < sizeof(__kernel_sa_family_t) ||
 	    srx->transport_len > len)
 		return -EINVAL;
 
@@ -396,7 +396,7 @@ static int rxrpc_connect(struct socket *sock, struct sockaddr *addr,
 		rx->srx.srx_family = AF_RXRPC;
 		rx->srx.srx_service = 0;
 		rx->srx.transport_type = srx->transport_type;
-		rx->srx.transport_len = sizeof(sa_family_t);
+		rx->srx.transport_len = sizeof(__kernel_sa_family_t);
 		rx->srx.transport.family = srx->transport.family;
 		local = rxrpc_lookup_local(&rx->srx);
 		if (IS_ERR(local)) {

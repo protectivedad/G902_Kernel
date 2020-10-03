@@ -692,7 +692,7 @@ static int sctp_inetaddr_event(struct notifier_block *this, unsigned long ev,
 static int sctp_ctl_sock_init(void)
 {
 	int err;
-	sa_family_t family = PF_INET;
+	__kernel_sa_family_t family = PF_INET;
 
 	if (sctp_get_pf_specific(PF_INET6))
 		family = PF_INET6;
@@ -740,7 +740,7 @@ int sctp_register_af(struct sctp_af *af)
 /* Get the table of functions for manipulating a particular address
  * family.
  */
-struct sctp_af *sctp_get_af_specific(sa_family_t family)
+struct sctp_af *sctp_get_af_specific(__kernel_sa_family_t family)
 {
 	switch (family) {
 	case AF_INET:
@@ -795,7 +795,7 @@ static void sctp_inet_skb_msgname(struct sk_buff *skb, char *msgname, int *len)
 }
 
 /* Do we support this AF? */
-static int sctp_inet_af_supported(sa_family_t family, struct sctp_sock *sp)
+static int sctp_inet_af_supported(__kernel_sa_family_t family, struct sctp_sock *sp)
 {
 	/* PF_INET only supports AF_INET addresses. */
 	return (AF_INET == family);
@@ -967,7 +967,7 @@ static struct sctp_af sctp_af_inet = {
 #endif
 };
 
-struct sctp_pf *sctp_get_pf_specific(sa_family_t family) {
+struct sctp_pf *sctp_get_pf_specific(__kernel_sa_family_t family) {
 
 	switch (family) {
 	case PF_INET:
@@ -980,7 +980,7 @@ struct sctp_pf *sctp_get_pf_specific(sa_family_t family) {
 }
 
 /* Register the PF specific function table.  */
-int sctp_register_pf(struct sctp_pf *pf, sa_family_t family)
+int sctp_register_pf(struct sctp_pf *pf, __kernel_sa_family_t family)
 {
 	switch (family) {
 	case PF_INET:

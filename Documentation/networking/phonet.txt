@@ -75,7 +75,7 @@ Network layer
 The Phonet socket address family maps the Phonet packet header:
 
   struct sockaddr_pn {
-    sa_family_t spn_family;    /* AF_PHONET */
+    __kernel_sa_family_t spn_family;    /* AF_PHONET */
     uint8_t     spn_obj;       /* Object ID */
     uint8_t     spn_dev;       /* Device ID */
     uint8_t     spn_resource;  /* Resource or function */

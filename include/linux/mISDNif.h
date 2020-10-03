@@ -276,7 +276,7 @@ struct mISDNhead {
 #define SOL_MISDN	0
 
 struct sockaddr_mISDN {
-	sa_family_t    family;
+	__kernel_sa_family_t    family;
 	unsigned char	dev;
 	unsigned char	channel;
 	unsigned char	sapi;

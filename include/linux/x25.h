@@ -57,7 +57,7 @@ struct x25_address {
  *	Linux X.25 Address structure, used for bind, and connect mostly.
  */
 struct sockaddr_x25 {
-	sa_family_t	   sx25_family;		/* Must be AF_X25 */
+	__kernel_sa_family_t	   sx25_family;		/* Must be AF_X25 */
 	struct x25_address sx25_addr;		/* X.121 Address */
 };
 

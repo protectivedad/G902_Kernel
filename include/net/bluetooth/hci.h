@@ -932,7 +932,7 @@ static inline struct hci_sco_hdr *hci_sco_hdr(const struct sk_buff *skb)
 #define HCI_CMSG_TSTAMP	0x0002
 
 struct sockaddr_hci {
-	sa_family_t    hci_family;
+	__kernel_sa_family_t    hci_family;
 	unsigned short hci_dev;
 };
 #define HCI_DEV_NONE	0xffff

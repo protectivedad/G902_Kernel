@@ -40,7 +40,7 @@ enum {
 
 /* IUCV socket address */
 struct sockaddr_iucv {
-	sa_family_t	siucv_family;
+	__kernel_sa_family_t	siucv_family;
 	unsigned short	siucv_port;		/* Reserved */
 	unsigned int	siucv_addr;		/* Reserved */
 	char		siucv_nodeid[8];	/* Reserved */

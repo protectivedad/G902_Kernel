@@ -125,7 +125,7 @@ enum {
 #define LSAP_ANY              0xff
 
 struct sockaddr_irda {
-	sa_family_t sir_family;   /* AF_IRDA */
+	__kernel_sa_family_t sir_family;   /* AF_IRDA */
 	__u8        sir_lsap_sel; /* LSAP selector */
 	__u32       sir_addr;     /* Device address */
 	char        sir_name[25]; /* Usually <service>:IrDA:TinyTP */
