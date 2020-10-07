@@ -59,4 +59,17 @@ config MTD_UBI_GLUEBI
 	   software.
 
 source "drivers/mtd/ubi/Kconfig.debug"
+
+config MTD_UBI_UBIBLK
+	tristate "Read-only block transition layer on top of UBI"
+	help
+	   Read-only block interface on top of UBI.
+
+	   This option adds ubiblk, which creates a read-ony block device for
+	   each UBI volume.  It makes it possible to use block filesystems on
+	   top of UBI (and thus, on top of MTDs while avoiding bad blocks).
+
+	   The devices are named ubiblkX_Y where X is the UBI number and Y is
+	   the Volume ID.
+
 endmenu
