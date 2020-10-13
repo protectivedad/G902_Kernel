@@ -141,6 +141,6 @@ void amon_cpu_dead(void)
 	  [LAUNCH_A0] "ir" (offsetof(struct cpulaunch, a0)),
 	  [LAUNCH_FLAGS] "ir" (offsetof(struct cpulaunch, flags)),
 	  [waitperiod] "ir" ((cpufreq / 2) / 100)	/* delay of ~10ms  */
-	: "ra","a0","a1","a2","a3","sp" /* ,"gp" */
+	: "ra","a0","a1","a2","a3" /* ,"sp","gp" */
 	);
 }
