@@ -351,7 +351,17 @@ config ROOTFS_IN_FLASH_NO_PADDING
 
 config MTD_KERNEL_PART_SIZ
 	hex 'MTD Kernel Partition Size (Unit:Bytes)'
-	default 0xD0000
+	default 0x190000
+	depends on RT2880_ROOTFS_IN_FLASH && !ROOTFS_IN_FLASH_NO_PADDING
+
+config MTD_ROOTFS_PART_SIZ
+	hex 'MTD RootFS Partition Size (Unit:Bytes)'
+	default 0x30000
+	depends on RT2880_ROOTFS_IN_FLASH && !ROOTFS_IN_FLASH_NO_PADDING
+
+config MTD_ROOTFS_EXT_PART_SIZ
+	hex 'MTD RootFS_Ext Partition Size (Unit:Bytes)'
+	default 0x0
 	depends on RT2880_ROOTFS_IN_FLASH && !ROOTFS_IN_FLASH_NO_PADDING
 
 config  RALINK_TIMER
