@@ -50,7 +50,7 @@ config RALINK_RT2880
 	select RALINK_RT2880_MP
 	select CSRC_R4K
 	select CEVT_R4K
-        help
+	help
          Ralink evaluation board based on RT2880
 
 config RALINK_RT3052
@@ -68,7 +68,7 @@ config RALINK_RT3052
 	select CSRC_R4K
 	select CEVT_R4K
 	select RALINK_RT3052_MP2 if !RALINK_RT3350
-        help
+	help
          Ralink evaluation board based on RT3052
 
 config RALINK_RT3352
@@ -77,14 +77,14 @@ config RALINK_RT3352
 	select IRQ_CPU
 	select SWAP_IO_SPACE
 	select SYS_HAS_CPU_MIPS32_R1
-        select SYS_HAS_CPU_MIPS32_R2
+	select SYS_HAS_CPU_MIPS32_R2
 	select SYS_SUPPORTS_LITTLE_ENDIAN
 	select BOOT_ELF32
 	select SYS_SUPPORTS_32BIT_KERNEL
 	select RALINK_RT3352_MP
 	select CSRC_R4K
 	select CEVT_R4K
-        help
+	help
          Ralink evaluation board based on RT3352
 
 config RALINK_RT5350
@@ -110,14 +110,14 @@ config RALINK_RT3883
 	select HW_HAS_PCI
 	select SWAP_IO_SPACE
 	select SYS_HAS_CPU_MIPS32_R1
-        select SYS_HAS_CPU_MIPS32_R2
+	select SYS_HAS_CPU_MIPS32_R2
 	select SYS_SUPPORTS_LITTLE_ENDIAN
 	select BOOT_ELF32
 	select SYS_SUPPORTS_32BIT_KERNEL
 	select RALINK_RT3883_MP
 	select CSRC_R4K
 	select CEVT_R4K
-        help
+	help
          Ralink evaluation board based on RT3883
 
 config RALINK_MT7620
@@ -133,7 +133,7 @@ config RALINK_MT7620
 	select SYS_SUPPORTS_32BIT_KERNEL
 	select CSRC_R4K
 	select CEVT_R4K
-        help
+      help
          Ralink evaluation board based on MT7620
 
 config RALINK_MT7621
@@ -147,7 +147,7 @@ config RALINK_MT7621
 	select SYS_SUPPORTS_LITTLE_ENDIAN
 	select BOOT_ELF32
 	select SYS_SUPPORTS_32BIT_KERNEL
-	select CPU_SUPPORTS_HIGHMEM 
+	select CPU_SUPPORTS_HIGHMEM
 	select SYS_SUPPORTS_HIGHMEM
 	select CSRC_R4K
 	select CEVT_R4K
@@ -156,7 +156,7 @@ config RALINK_MT7621
 	select SYS_SUPPORTS_SMP
 	select SYS_SUPPORTS_MIPS_CMP
 	select IRQ_GIC
-        help
+	help
          Ralink evaluation board based on MT7621
 
 config RALINK_MT7628
@@ -166,13 +166,13 @@ config RALINK_MT7628
 	select HW_HAS_PCI
 	select SWAP_IO_SPACE
 	select SYS_HAS_CPU_MIPS32_R1
-        select SYS_HAS_CPU_MIPS32_R2
+	select SYS_HAS_CPU_MIPS32_R2
 	select SYS_SUPPORTS_LITTLE_ENDIAN
 	select BOOT_ELF32
 	select SYS_SUPPORTS_32BIT_KERNEL
 	select CSRC_R4K
 	select CEVT_R4K
-        help
+	help
          Ralink evaluation board based on MT7628
 endchoice
 
@@ -328,7 +328,7 @@ config MIPS_FPU_EMU
 	   FPU emulator enabled. Turning off this option results in a kernel which
 	   does not catch floating operations exceptions. Make sure that your toolchain
 	   is configured to enable software floating point emulation in that case.
-		
+
 	   If unsure say Y here.
 
 config MIPS_MSC
@@ -425,7 +425,7 @@ config IRQ_GT641XX
 	bool
 
 config IRQ_GIC
-        bool
+	bool
 
 #config MIPS_IOCU
 #	bool "MIPS IOCU support"

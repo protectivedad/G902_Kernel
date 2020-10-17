@@ -79,11 +79,11 @@ extern void tc3162wdog_kick(void);
 static int waitDmtPowerOn(int argc, char *argv[], void *p);
 static int checkReboot(int argc, char *argv[], void *p);
 #endif
-#if defined(TCSUPPORT_LED_BTN_CHECK) || defined(TCSUPPORT_TEST_LED_ALL) 
+#if defined(TCSUPPORT_LED_BTN_CHECK) || defined(TCSUPPORT_TEST_LED_ALL)
 #if/*TCSUPPORT_COMPILE*/ defined(TCSUPPORT_BTN_CHECK)
-extern int gButtonCheck; 
+extern int gButtonCheck;
 #endif/*TCSUPPORT_COMPILE*/
-#if defined(TCSUPPORT_LED_CHECK) || defined(TCSUPPORT_TEST_LED_ALL) 
+#if defined(TCSUPPORT_LED_CHECK) || defined(TCSUPPORT_TEST_LED_ALL)
 extern int doLedOn(void);
 extern int doLedOff(void);
 static int doLedCheck(int argc, char *argv[], void *p);
@@ -134,19 +134,19 @@ static const cmds_t sysCmds[] = {
 #if/*TCSUPPORT_COMPILE*/ defined(TCSUPPORT_BOOTLOADER_MODIFY_PVNAME)
 	{"atsp",	doSysAtsp,			0x02,	0,	NULL},
 	{"atsv",	doSysAtsv,			0x02,	0,	NULL},
-	{"atpvsave",	doSysAtspv,		0x02,	0,	NULL},	
+	{"atpvsave",	doSysAtspv,		0x02,	0,	NULL},
 #endif/*TCSUPPORT_COMPILE*/
-#if defined(TCSUPPORT_LED_BTN_CHECK) || defined(TCSUPPORT_TEST_LED_ALL) 
-#if defined(TCSUPPORT_LED_CHECK) || defined(TCSUPPORT_TEST_LED_ALL) 
+#if defined(TCSUPPORT_LED_BTN_CHECK) || defined(TCSUPPORT_TEST_LED_ALL)
+#if defined(TCSUPPORT_LED_CHECK) || defined(TCSUPPORT_TEST_LED_ALL)
 	{"led",		doLedCheck,		0x02,	0,	NULL},
 #endif
 #if/*TCSUPPORT_COMPILE*/ defined(TCSUPPORT_BTN_CHECK)
-	{"button",	doButtonCheck,	0x02,	0,	NULL},	
+	{"button",	doButtonCheck,	0x02,	0,	NULL},
 #endif/*TCSUPPORT_COMPILE*/
 #endif
 #if defined(TCSUPPORT_USBHOST)
 	{"usbeye",  doUSBEYE,  0x02,   0,  NULL},
-#endif	
+#endif
 #if/*TCSUPPORT_COMPILE*/ defined(TCSUPPORT_C2_TRUE)
 	{"romcheck",	    	doRomCheck,	0x02,	0,	NULL},
 #endif/*TCSUPPORT_COMPILE*/
@@ -171,7 +171,7 @@ int doSys(int argc, char *argv[], void *p)
 #else
 	return subcmd(sysCmds, argc, argv, p);
 #endif
-	
+
 }
 
 int doSysMemrl(int argc, char *argv[], void *p)
@@ -294,15 +294,15 @@ int doSysMac(int argc, char *argv[], void *p)
 #if/*TCSUPPORT_COMPILE*/ defined(TCSUPPORT_BOOTLOADER_MODIFY_PVNAME)
 static int doSysAtsp(int argc, char *argv[], void *p){
     setUserSpaceFlag(6);
-	return 0;	
+	return 0;
 }
 
 static int doSysAtsv(int argc, char *argv[], void *p){
     setUserSpaceFlag(7);
 	return 0;
-	
+
 }
-  
+
 static int doSysAtspv(int argc, char *argv[], void *p){
     setUserSpaceFlag(8);
 	return 0;
@@ -357,7 +357,7 @@ int my_atoi(const char *str)
 			str++;
 		}
 	}
-	else 
+	else
 		return 0;
 	while( *str >= '0' && *str <= '9' )
 		result = result*10 + (*str++ - '0');
@@ -413,7 +413,7 @@ static int doWan2lan(int argc, char *argv[], void *p)
 #else
 		print_state=1;
 #endif
-	}	
+	}
 	else if(strcmp(argv[1], "off") == 0){
 		masko_on_off = 0;
 #if !defined(TCSUPPORT_CMDPROMPT)
@@ -465,7 +465,7 @@ getWan2lanInfo(char *wan2lan_print)
 	print_errormsg=0;
 	print_state=0;
 	print_portmask=0;
-	
+
 	return index;
 }
 int sys_proc_wan2lan(char *buf, char **start, off_t off, int count,
@@ -537,20 +537,20 @@ int sys_proc_subcmds(char *buf, char **start, off_t off, int count,
 static int waitDmtPowerOn(int argc, char *argv[], void *p)
 {
 	unsigned long int value;
-	/* wait until dmt3095 is power on */       
+	/* wait until dmt3095 is power on */
         while(1){
 		if(isRT63365){
 			//printk("GPIO %x\n",(VPint(CR_GPIO_DATA)));
 			value = (VPint(CR_GPIO_DATA) & (1<<0));
 		}else{
 			value = (VPint(CR_GPIO_DATA) & 0x2000000);
-		}	
+		}
 		if(value){
 			return 0;
 		}else{
 			msleep(1000);
 		}
-	
+
 		tc3162wdog_kick();
         }
 }
@@ -568,16 +568,16 @@ static int checkReboot(int argc, char *argv[], void *p)
 }
 #endif
 
-#if defined(TCSUPPORT_LED_BTN_CHECK) || defined(TCSUPPORT_TEST_LED_ALL) 
-#if defined(TCSUPPORT_LED_CHECK) || defined(TCSUPPORT_TEST_LED_ALL) 
+#if defined(TCSUPPORT_LED_BTN_CHECK) || defined(TCSUPPORT_TEST_LED_ALL)
+#if defined(TCSUPPORT_LED_CHECK) || defined(TCSUPPORT_TEST_LED_ALL)
 static int doLedCheck(int argc, char *argv[], void *p)
 {
 	setUserSpaceFlag(9);
 	if((argc == 2) && ((strcmp(argv[1], "on") == 0) || (strcmp(argv[1], "off") == 0))){
 		if(strcmp(argv[1], "off") == 0){
 			doLedOff();
-			printk("All led is turned off! \r\n");	
-		 }	
+			printk("All led is turned off! \r\n");
+		 }
 		else{
 			doLedOn();
 			printk("All led is turned on! \r\n");
@@ -589,7 +589,7 @@ static int doLedCheck(int argc, char *argv[], void *p)
 	}
 
 	return 0;
-}	
+}
 #endif
 #if/*TCSUPPORT_COMPILE*/ defined(TCSUPPORT_BTN_CHECK)
 static int doButtonCheck(int argc, char *argv[], void *p)
@@ -602,14 +602,14 @@ static int doButtonCheck(int argc, char *argv[], void *p)
 	if (strcmp(argv[1], "disable") == 0){
 		gButtonCheck = 1;
 		printk("All buttons are disabled! \r\n");
-	}	
+	}
 	else{
 		gButtonCheck = 0;
-		printk("All buttons are enabled! \r\n");	
+		printk("All buttons are enabled! \r\n");
 	 }
 
 	return 0;
-}	
+}
 #endif/*TCSUPPORT_COMPILE*/
 #endif
 

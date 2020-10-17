@@ -37,7 +37,7 @@
 #include <linux/init.h>
 #include <linux/platform_device.h>
 
-#if defined(CONFIG_RT3XXX_EHCI) || defined(CONFIG_RT3XXX_OHCI) 
+#if defined(CONFIG_RT3XXX_EHCI) || defined(CONFIG_RT3XXX_OHCI)
 #define IRQ_RT3XXX_USB 18
 static struct resource rt3xxx_ehci_resources[] = {
 	[0] = {

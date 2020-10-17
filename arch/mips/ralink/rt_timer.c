@@ -205,7 +205,7 @@ static irqreturn_t rt2880tmr_irq_handler(int irq, void *dev_id, struct pt_regs *
     reg_val = sysRegRead(TMRSTAT);
     //Writing '1' to TMRSTAT[0]:TMR0INT to clear the interrupt
     reg_val &= ~(0x7);
-    reg_val |= (0x1<<0); 
+    reg_val |= (0x1<<0);
     sysRegWrite(TMRSTAT, reg_val);
 
     //execute callback function
@@ -291,7 +291,7 @@ static irqreturn_t rt2880tmr1_irq_handler(int irq, void *dev_id, struct pt_regs 
     reg_val = sysRegRead(TMRSTAT);
     //Writing '1' to TMRSTAT[1]:TMR1INT to clear the interrupt
     reg_val &= ~(0x7);
-    reg_val |= (0x1<<1); 
+    reg_val |= (0x1<<1);
     sysRegWrite(TMRSTAT, reg_val);
 
     //execute callback function
@@ -358,7 +358,7 @@ static irqreturn_t rt2880tmr2_irq_handler(int irq, void *dev_id)
     reg_val = sysRegRead(TMRSTAT);
     //Writing '1' to TMRSTAT[1]:TMR2INT to clear the interrupt
     reg_val &= ~(0x7);
-    reg_val |= (0x1<<2); 
+    reg_val |= (0x1<<2);
     sysRegWrite(TMRSTAT, reg_val);
 
     //execute callback function

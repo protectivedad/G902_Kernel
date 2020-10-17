@@ -612,13 +612,13 @@ static int prio_enable_write_proc(struct file *file, const char *buffer,
 		downstream_qos_enable = 0;
 	}
 	else
-	{	
+	{
 		//printk("Enable Downstream Qos\n");
 		downstream_qos_enable = 1;
-		
-	}	
+
+	}
 	return count;
-		
+
 }
 static int prio_enable_read_proc(char *buf, char **start, off_t off, int count,
     int *eof, void *data){
@@ -637,7 +637,7 @@ static int prio_enable_read_proc(char *buf, char **start, off_t off, int count,
 
 	if (len < 0)
 		len = 0;
-	
+
 return len;
 
 #if 0
@@ -645,11 +645,11 @@ return len;
 		printk("Downstream Qos is Disabled\n");
 	}else if(downstream_qos_enable == 1){
 		printk("Downstream Qos is Enabled\n");
-	}	
+	}
 
 	return 0;
-#endif	
-}	
+#endif
+}
 
 static int voip_port_write_proc(struct file *file, const char *buffer,
     unsigned long count, void *data){
@@ -751,7 +751,7 @@ static void __exit tccicmd_exit(void)
 #ifdef TCSUPPORT_DOWNSTREAM_QOS
 	remove_proc_entry("tc3162/Prio_Enable", NULL);
 	remove_proc_entry("tc3162/Prio_Voip_Rxport", NULL);
-#endif	
+#endif
 
 	//--tcadslcmd_exit();
 	tcsyscmd_exit();

@@ -69,7 +69,7 @@ static void __init vpe_local_setup(unsigned int numvpes)
 		if (cpu_has_veic) {
 			set_vi_handler(perf_interrupt+GIC_PIN_TO_VEC_OFFSET, gic_eic_tmr_irq_dispatch);
 		}
-	
+
 	}
 }
 

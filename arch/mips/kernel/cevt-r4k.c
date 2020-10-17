@@ -32,7 +32,6 @@ static int mips_next_event(unsigned long delta,
 	cnt += delta;
 	write_c0_compare(cnt);
 	res = ((int)(read_c0_count() - cnt) > 0) ? -ETIME : 0;
-
 	return res;
 }
 
@@ -81,13 +80,13 @@ irqreturn_t c0_compare_interrupt(int irq, void *dev_id)
 	 * above we now know that the reason we got here must be a timer
 	 * interrupt.  Being the paranoiacs we are we check anyway.
 	 */
-
 	if (!r2 || (read_c0_cause() & (1 << 30))) {
 		/* Clear Count/Compare Interrupt */
 		write_c0_compare(read_c0_compare());
 		cd = &per_cpu(mips_clockevent_device, cpu);
 		cd->event_handler(cd);
 	}
+
 out:
 	return IRQ_HANDLED;
 }
@@ -217,7 +216,6 @@ int __cpuinit r4k_clockevent_init(void)
 	cd->set_next_event	= mips_next_event;
 	cd->set_mode		= mips_set_clock_mode;
 	cd->event_handler	= mips_event_handler;
-
 
 	clockevents_register_device(cd);
 

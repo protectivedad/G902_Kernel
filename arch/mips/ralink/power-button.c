@@ -66,7 +66,7 @@
 #define SURF_OUT(base, reg) *((unsigned int *)KSEG1ADDR( base + reg ))
 
 #define EnableTimer SURF_IN( SURF_TIMER_BASE, SURF_TMR1CTL, 0x9f )
-#define DisableTimer SURF_IN( SURF_TIMER_BASE, SURF_TMR1CTL, 0x1f ) 
+#define DisableTimer SURF_IN( SURF_TIMER_BASE, SURF_TMR1CTL, 0x1f )
 #define ActiveBoard  { 		unsigned int temp=SURF_OUT(SURF_PIO_BASE, SURF_PIODATA2) | SURF_LED0_MASK; \
 				SURF_IN( SURF_PIO_BASE, SURF_PIODATA2, temp ); \
 				surf_button_state=surf_board_state=surf_active; \
@@ -81,8 +81,8 @@ static volatile int surf_btn_push_jiffies=-1;
 static void surf_events_bh(void *dummy);
 
 
-// Data structure written to flash memory 
-struct flashData 
+// Data structure written to flash memory
+struct flashData
 {
 	unsigned int boot_to_standby_prefrence;
 	unsigned int need_standby;
@@ -121,7 +121,7 @@ struct init_request {
 
 
 static int proc_read_status(char *page, char **start,
-                            off_t off, int count, 
+                            off_t off, int count,
                             int *eof, void *data)
 {
 	return 0;
@@ -130,14 +130,14 @@ static int proc_read_status(char *page, char **start,
 
 static int proc_write_status(struct file *file,
                              const char *buffer,
-                             unsigned long count, 
+                             unsigned long count,
                              void *data)
 {
 	char lbuf[64];
 	int len=64;
 	if( count < len)
 		len = count;
-	
+
 	if(copy_from_user(lbuf, buffer, len))
 	{
 		return -EFAULT;
@@ -150,12 +150,12 @@ static int proc_write_status(struct file *file,
 	else if( strncmp(lbuf, "standby_on", 10)==0)
 	{
 		flash_data.boot_to_standby_prefrence=1;
-		WriteToFlash(&flash_data, sizeof(flash_data));	
+		WriteToFlash(&flash_data, sizeof(flash_data));
 	}
 	else if( strncmp(lbuf, "standby_off", 11)==0)
 	{
 		flash_data.boot_to_standby_prefrence=0;
-		WriteToFlash(&flash_data, sizeof(flash_data));	
+		WriteToFlash(&flash_data, sizeof(flash_data));
 	}
 	else printk("unknown message: %d\n", lbuf);
 
@@ -171,9 +171,9 @@ static int create_proc()
         button_dir = proc_mkdir(MODULE_NAME, NULL);
         if(button_dir == NULL)
 		return rv;
-        
+
         button_dir->owner = THIS_MODULE;
-        
+
         status_file = create_proc_entry(PROC_ENTRY, 0644, button_dir);
         if(status_file == NULL)
 	{
@@ -184,7 +184,7 @@ static int create_proc()
         status_file->read_proc = NULL;
         status_file->write_proc = proc_write_status;
         status_file->owner = THIS_MODULE;
-        
+
         return rv;
 }
 
@@ -204,13 +204,13 @@ static void surf_events_bh(void *dummy)
 				struct file *filep = NULL;
 				struct init_request req;
 				req.magic=0x03091969;		//this magic number is needly exactly to enter run-level
-				req.cmd=0x1;			
+				req.cmd=0x1;
 				req.runlevel='6';		//run level 6 requested
 				req.sleeptime=5;
 				bzero(req.data, sizeof(req.data));
 
 				//Now pass message to init controller
-				filep = filp_open(INIT_CTL, O_WRONLY, 0); 
+				filep = filp_open(INIT_CTL, O_WRONLY, 0);
 				if( filep != NULL )
 				{
 					filep->f_op->write(filep, &req, sizeof(req), &filep->f_pos);
@@ -221,12 +221,12 @@ static void surf_events_bh(void *dummy)
 		case surf_restore_settings:
 			{
 				struct file *filep = NULL;
-				filep = filp_open(FIFO_FILE, O_WRONLY, 0); 
+				filep = filp_open(FIFO_FILE, O_WRONLY, 0);
 				if( filep != NULL )
 				{
 					filep->f_op->write(filep, "restore_settings", 16, &filep->f_pos);
 					filp_close(filep, NULL);
-				}				
+				}
 			}
 			ActiveBoard;
 			break;
@@ -248,7 +248,7 @@ static void inline button_released()
 		schedule_task(&surf_events_task);
 	}
 }
-	
+
 
 static inline void update_LED()
 {
@@ -266,7 +266,7 @@ static inline void update_LED()
 			blink=0;
 			break;
 		case surf_halt:
-			if ( diff < surf_halt_blink_rate) return; 
+			if ( diff < surf_halt_blink_rate) return;
 			break;
 		case surf_boot:
 			if ( diff < surf_boot_blink_rate) return;
@@ -291,7 +291,7 @@ static void surf_timer_interrupt(int irq, void *dev, struct pt_regs *regs)
 	int total_time;
 
 	//clear timer intstat
-	SURF_IN( SURF_TIMER_BASE, SURF_TMR_STAT, 0x2);	
+	SURF_IN( SURF_TIMER_BASE, SURF_TMR_STAT, 0x2);
 
 	DisableTimer;
 
@@ -317,17 +317,17 @@ static void surf_timer_interrupt(int irq, void *dev, struct pt_regs *regs)
 
 		else surf_button_state=surf_active;
 	}
-	
+
 	update_LED();
 	EnableTimer;
 }
 
 static inline void surf_button_interrupt(int irq, void *dev, struct pt_regs *regs)
 {
-	unsigned int pio_btn_data = SURF_OUT(SURF_PIO_BASE, SURF_PIODATA2); 
+	unsigned int pio_btn_data = SURF_OUT(SURF_PIO_BASE, SURF_PIODATA2);
 
 	//clear btn instat
-	SURF_IN( SURF_PIO_BASE, SURF_BTNINT, 0xffffffff); 
+	SURF_IN( SURF_PIO_BASE, SURF_BTNINT, 0xffffffff);
 
 	switch( surf_board_state )
 	{
@@ -374,7 +374,7 @@ int power_button_init_module()
 
 	//set proper polarity values
 	status = SURF_OUT( SURF_PIO_BASE, SURF_PIOPOL2);
-	status |= (SURF_LED0_MASK | SURF_BTN0_MASK); 
+	status |= (SURF_LED0_MASK | SURF_BTN0_MASK);
 	SURF_IN( SURF_PIO_BASE, SURF_PIOPOL2, status);
 
 	//turn the led off
@@ -397,14 +397,14 @@ int power_button_init_module()
 	// Enable timer to show the light blinking (board is booting status)
 	EnableTimer;
 
-	// Create proc enteries, so as user processes can change boot prefrence	
+	// Create proc enteries, so as user processes can change boot prefrence
 	if( create_proc() != 0)
 	{
 		printk("error creating proc enteries for surf_status\n");
-		ActiveBoard;	
+		ActiveBoard;
 	}
 
-	return 0;	
+	return 0;
 }
 
 void power_button_cleanup_module()

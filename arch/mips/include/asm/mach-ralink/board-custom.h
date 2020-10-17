@@ -91,14 +91,14 @@ SDIO slot index number used by connectivity combo chip:
 #define RAMDOM_READ 1<<0
 #define CACHE_READ  1<<1
 /*******************************************************************************
- * NFI & ECC Configuration 
+ * NFI & ECC Configuration
  *******************************************************************************/
 typedef struct
 {
     u16 id;			//deviceid+menuid
     u8  addr_cycle;
     u8  iowidth;
-    u16 totalsize;	
+    u16 totalsize;
     u16 blocksize;
     u16 pagesize;
     u32 timmingsetting;
@@ -110,10 +110,10 @@ static const flashdev_info g_FlashTable[]={
     //micro
     {0xAA2C,  5,  8,  256,	128,  2048,  0x01113,  "MT29F2G08ABD",	0},
     {0xB12C,  4,  16, 128,	128,  2048,  0x01113,  "MT29F1G16ABC",	0},
-    {0xBA2C,  5,  16, 256,	128,  2048,  0x01113,  "MT29F2G16ABD",	0}, 
+    {0xBA2C,  5,  16, 256,	128,  2048,  0x01113,  "MT29F2G16ABD",	0},
     {0xAC2C,  5,  8,  512,	128,  2048,  0x01113,  "MT29F4G08ABC",	0},
     {0xBC2C,  5,  16, 512,	128,  2048,  0x44333,  "MT29F4G16ABD",	0},
-    //samsung 
+    //samsung
     {0xBAEC,  5,  16, 256,	128,  2048,  0x01123,  "K522H1GACE",	0},
     {0xBCEC,  5,  16, 512,	128,  2048,  0x01123,  "K524G2GACB",	0},
     {0xDAEC,  5,  8,  256,	128,  2048,  0x33222,  "K9F2G08U0A",	RAMDOM_READ},
@@ -137,8 +137,8 @@ static const flashdev_info g_FlashTable[]={
     {0x0000,  0,  0,  0,	0,	  0,	 0, 	   "xxxxxxxxxxxxx", 0}
 };
 #endif
-	
-	
+
+
 #define NFI_DEFAULT_ACCESS_TIMING        (0x44333)
 
 //uboot only support 1 cs

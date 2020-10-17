@@ -89,7 +89,7 @@ char *prom_getenv(char *envname)
 	int i, index=0;
 	// Dennis Lee +
 	return NULL;
-	// 
+	//
 	i = strlen(envname);
 
 	while (prom_envp(index)) {
@@ -303,11 +303,11 @@ void prom_init_sysclk(void)
 	u32 reg __maybe_unused;
 
 #if defined(CONFIG_RT2880_FPGA)
-        mips_cpu_feq = 25000000; 
-#elif defined (CONFIG_RT3052_FPGA) || defined (CONFIG_RT3352_FPGA) || defined (CONFIG_RT2883_FPGA) || defined (CONFIG_RT3883_FPGA) || defined (CONFIG_RT5350_FPGA) 
-        mips_cpu_feq = 40000000; 
+        mips_cpu_feq = 25000000;
+#elif defined (CONFIG_RT3052_FPGA) || defined (CONFIG_RT3352_FPGA) || defined (CONFIG_RT2883_FPGA) || defined (CONFIG_RT3883_FPGA) || defined (CONFIG_RT5350_FPGA)
+        mips_cpu_feq = 40000000;
 #elif defined (CONFIG_RT6855_FPGA) || defined (CONFIG_MT7620_FPGA) || defined (CONFIG_MT7628_FPGA)
-        mips_cpu_feq = 50000000; 
+        mips_cpu_feq = 50000000;
 #elif defined (CONFIG_MT7621_FPGA)
         mips_cpu_feq = 50000000;
 #else
@@ -317,20 +317,20 @@ void prom_init_sysclk(void)
 
 #if defined (CONFIG_RT2880_ASIC)
         clk_sel = (reg>>20) & 0x03;
-#elif defined (CONFIG_RT2883_ASIC) 
+#elif defined (CONFIG_RT2883_ASIC)
         clk_sel = (reg>>18) & 0x03;
-#elif defined (CONFIG_RT3052_ASIC) 
+#elif defined (CONFIG_RT3052_ASIC)
         clk_sel = (reg>>18) & 0x01;
-#elif defined (CONFIG_RT3352_ASIC) 
+#elif defined (CONFIG_RT3352_ASIC)
         clk_sel = (reg>>8) & 0x01;
-#elif defined (CONFIG_RT5350_ASIC) 
+#elif defined (CONFIG_RT5350_ASIC)
 	{
         u8 clk_sel2;
         clk_sel = (reg>>8) & 0x01;
         clk_sel2 = (reg>>10) & 0x01;
         clk_sel |= (clk_sel2 << 1 );
 	}
-#elif defined (CONFIG_RT3883_ASIC) 
+#elif defined (CONFIG_RT3883_ASIC)
         clk_sel = (reg>>8) & 0x03;
 #elif defined (CONFIG_MT7620_ASIC) 
 	reg = (*((volatile u32 *)(RALINK_SYSCTL_BASE + 0x58)));
@@ -383,7 +383,7 @@ void prom_init_sysclk(void)
 	case 3:
 		mips_cpu_feq = (300000000);
 		break;
-#elif defined (CONFIG_RALINK_RT2883) 
+#elif defined (CONFIG_RALINK_RT2883)
 	case 0:
 		mips_cpu_feq = (380*1000*1000);
 		break;
@@ -396,7 +396,7 @@ void prom_init_sysclk(void)
 	case 3:
 		mips_cpu_feq = (420*1000*1000);
 		break;
-#elif defined (CONFIG_RALINK_RT3052) 
+#elif defined (CONFIG_RALINK_RT3052)
 #if defined (CONFIG_RALINK_RT3350)
 		// MA10 is floating
 	case 0:
@@ -408,28 +408,28 @@ void prom_init_sysclk(void)
 		mips_cpu_feq = (320*1000*1000);
 		break;
 	case 1:
-		mips_cpu_feq = (384*1000*1000); 
+		mips_cpu_feq = (384*1000*1000);
 		break;
 #endif
-#elif defined (CONFIG_RALINK_RT3352) 
+#elif defined (CONFIG_RALINK_RT3352)
 	case 0:
 		mips_cpu_feq = (384*1000*1000);
 		break;
 	case 1:
-		mips_cpu_feq = (400*1000*1000); 
+		mips_cpu_feq = (400*1000*1000);
 		break;
-#elif defined (CONFIG_RALINK_RT3883) 
+#elif defined (CONFIG_RALINK_RT3883)
 	case 0:
 		mips_cpu_feq = (250*1000*1000);
 		break;
 	case 1:
-		mips_cpu_feq = (384*1000*1000); 
+		mips_cpu_feq = (384*1000*1000);
 		break;
 	case 2:
-		mips_cpu_feq = (480*1000*1000); 
+		mips_cpu_feq = (480*1000*1000);
 		break;
 	case 3:
-		mips_cpu_feq = (500*1000*1000); 
+		mips_cpu_feq = (500*1000*1000);
 		break;
 #elif defined(CONFIG_RALINK_RT5350)
 	case 0:
@@ -439,12 +439,12 @@ void prom_init_sysclk(void)
 		//reserved
 		break;
 	case 2:
-		mips_cpu_feq = (320*1000*1000); 
+		mips_cpu_feq = (320*1000*1000);
 		break;
 	case 3:
-		mips_cpu_feq = (300*1000*1000); 
+		mips_cpu_feq = (300*1000*1000);
 		break;
-#elif defined (CONFIG_RALINK_RT6855) 
+#elif defined (CONFIG_RALINK_RT6855)
 	case 0:
 		mips_cpu_feq = (400*1000*100);
 		break;
@@ -483,7 +483,7 @@ void prom_init_sysclk(void)
         case 1: //CPU PLL
 		reg = (*(volatile u32 *)(RALINK_MEMCTRL_BASE + 0x648));
 		fbdiv = ((reg >> 4) & 0x7F) + 1;
-		reg = (*(volatile u32 *)(RALINK_SYSCTL_BASE + 0x10)); 
+		reg = (*(volatile u32 *)(RALINK_SYSCTL_BASE + 0x10));
 		reg = (reg >> 6) & 0x7;
 		if(reg >= 6) { //25Mhz Xtal
 			mips_cpu_feq = 25 * fbdiv * 1000 * 1000;
@@ -512,8 +512,8 @@ void prom_init_sysclk(void)
 	}
 
 #endif
-	
-#if defined (CONFIG_RT3883_ASIC) 
+
+#if defined (CONFIG_RT3883_ASIC)
 	if ((reg>>17) & 0x1) { //DDR2
 		switch (clk_sel) {
 		case 0:

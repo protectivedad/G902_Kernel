@@ -31,7 +31,7 @@
 #define SURFBOARDINT_UART1	 8	/* UART Lite */
 #define SURFBOARDINT_UART	 9	/* UART */
 #define SURFBOARDINT_TIMER0	 10	/* timer0 */
-#elif defined (CONFIG_RALINK_RT3052) || defined (CONFIG_RALINK_RT3352) || defined (CONFIG_RALINK_RT2883) || defined (CONFIG_RALINK_RT5350) || defined (CONFIG_RALINK_RT6855) || defined (CONFIG_RALINK_MT7620) 
+#elif defined (CONFIG_RALINK_RT3052) || defined (CONFIG_RALINK_RT3352) || defined (CONFIG_RALINK_RT2883) || defined (CONFIG_RALINK_RT5350) || defined (CONFIG_RALINK_RT6855) || defined (CONFIG_RALINK_MT7620)
 #define RALINK_CPU_TIMER_IRQ 	 5	/* mips timer */
 #define SURFBOARDINT_GPIO	 6	/* GPIO */
 #define SURFBOARDINT_DMA	 7	/* DMA */
@@ -174,13 +174,13 @@
         ".set\tpop"                                             \
         : "=r" (__res));                                        \
         __res;})
-        
+
 #define write_32bit_cp0_register(register,value)                \
         __asm__ __volatile__(                                   \
         "mtc0\t%0,"STR(register)"\n\t"                          \
         "nop"                                                   \
         : : "r" (value));
-        
+
 /* bobtseng added --, 2006.3.6. */
 
 void surfboardint_init(void);

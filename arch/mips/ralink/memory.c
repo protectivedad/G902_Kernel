@@ -109,7 +109,7 @@ struct prom_pmemblock * __init prom_getmdesc(void)
 #else
 		prom_printf("rambase not set, set to default (0x00000000)\n");
 		rambase = 0x00000000;
-#endif 
+#endif
 	} else {
 #ifdef DEBUG
 		prom_printf("rambase = %s\n", env_str);
@@ -146,8 +146,8 @@ void __init prom_meminit(void)
 	struct prom_pmemblock *psave;
 #endif
 
-	//printk("ram start= %x, ram end= %x\n",rt2880_res_ram.start, rt2880_res_ram.end); 
-	//printk("size = %x\n",rt2880_res_ram.end - rt2880_res_ram.start); 
+	//printk("ram start= %x, ram end= %x\n",rt2880_res_ram.start, rt2880_res_ram.end);
+	//printk("size = %x\n",rt2880_res_ram.end - rt2880_res_ram.start);
  	//add_memory_region(0x0a000000, rt2880_res_ram.end - rt2880_res_ram.start, BOOT_MEM_RAM);
 #if defined(CONFIG_RT2880_ASIC) || defined(CONFIG_RT2880_FPGA)
  	add_memory_region(0x08000000, RAM_SIZE, BOOT_MEM_RAM);
@@ -161,7 +161,7 @@ void __init prom_meminit(void)
 #else
         add_memory_region(0x00000000, RAM_SIZE, BOOT_MEM_RAM);
 #endif
-	
+
 	//p = prom_getmdesc();
 #ifdef DEBUG
 	prom_printf("MEMORY DESCRIPTOR dump:\n");

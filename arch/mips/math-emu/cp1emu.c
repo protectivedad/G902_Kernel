@@ -178,11 +178,11 @@ static int isBranchInstr(mips_instruction * i)
  */
 static inline int cop1_64bit(struct pt_regs *xcp)
 {
-#ifdef CONFIG_DEBUG_PREEMPT	
+#ifdef CONFIG_DEBUG_PREEMPT
 	if (raw_cpu_has_fpu)
 #else
-	if (cpu_has_fpu)	
-#endif		
+	if (cpu_has_fpu)
+#endif
 		return xcp->cp0_status & ST0_FR;
 #ifdef CONFIG_64BIT
 	return !test_thread_flag(TIF_32BIT_REGS);
@@ -1289,6 +1289,7 @@ int fpu_emulator_cop1Handler(struct pt_regs *xcp, struct mips_fpu_struct *ctx,
 
 	return sig;
 }
+
 #ifdef CONFIG_DEBUG_FS
 
 static int fpuemu_stat_get(void *data, u64 *val)

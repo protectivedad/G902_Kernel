@@ -232,14 +232,14 @@ int ralink_nvram_ioctl(struct inode *inode, struct file *file, unsigned int req,
 		nvr = (nvram_ioctl_t __user *)arg;
 		index = nvr->index;
 		len = fb[index].flash_max_len - sizeof(fb[index].env.crc);
-			
+
 		if (nvram_getall(index, fb[index].env.data) == 0) {
 			if (copy_to_user(nvr->value, fb[index].env.data, len))
 				return -EFAULT;
 		}
 		break;
 	case RALINK_NVRAM_IOCTL_SET:
-		nvr = (nvram_ioctl_t *)arg;		
+		nvr = (nvram_ioctl_t *)arg;
 		value = (char *)kmalloc(MAX_VALUE_LEN, GFP_KERNEL);
 		if (!value)
 			return -ENOMEM;
@@ -310,7 +310,7 @@ int __init ra_nvram_init(void)
 #if LINUX_VERSION_CODE <= KERNEL_VERSION(2,6,36)
 	init_MUTEX(&nvram_sem);
 #else
-  sema_init(&nvram_sem,1);  
+  sema_init(&nvram_sem,1);
 #endif
 	down(&nvram_sem);
 #ifdef CONFIG_CONFIG_SHRINK
@@ -338,7 +338,7 @@ static int init_nvram_block(int index)
 	char *p, *q;
 
 	i = index;
-	
+
 	RANV_PRINT("--> nvram_init %d\n", index);
 	RANV_CHECK_INDEX(-1);
 
@@ -378,7 +378,7 @@ static int init_nvram_block(int index)
 		fb[i].dirty = 0;
 		return -1;
 	}
-	
+
 	//parse env to cache
 	p = fb[i].env.data;
 #ifdef CONFIG_CONFIG_SHRINK
@@ -396,7 +396,7 @@ static int init_nvram_block(int index)
 		*q = '\0'; //strip '='
 		fb[i].cache[j].name = kstrdup(p, GFP_KERNEL);
 		//printk("  %d '%s'->", i, p);
-	
+
 		p = q + 1; //value
 		if (NULL == (q = strchr(p, '\0'))) {
 			RANV_PRINT("parsed failed - cannot find '\\0'\n");
@@ -411,7 +411,7 @@ static int init_nvram_block(int index)
 			break;
 		}
 		if (*p == '\0') {
-			//end of env 
+			//end of env
 			break;
 		}
 	}
@@ -427,13 +427,13 @@ static int init_nvram_block(int index)
 static void ra_nvram_exit(void)
 {
 	int index;
-	
-	for (index = 0; index < FLASH_BLOCK_NUM+EXTEND_BLOCK_NUM; index++) {
+
+	for (index = 0; index < FLASH_BLOCK_NUM; index++) {
 		if (fb[index].dirty)
 			nvram_commit(index);
 
 		ra_nvram_close(index);
-	
+
 		fb[index].valid = 0;
 		//free env
 		kfree(fb[index].env.data);
@@ -663,7 +663,7 @@ int nvram_set(int index, char *name, char *value)
 	RANV_PRINT("--> nvram_set %d %s=%s\n", index, name, value);
 
 	RANV_CHECK_INDEX(-1);
-	
+
 	down(&nvram_sem);
 	RANV_CHECK_VALID();
 
@@ -754,13 +754,13 @@ char const *nvram_get(int index, char *name)
 	return NULL;
 }
 
-int nvram_getall(int index, char *buf) 
+int nvram_getall(int index, char *buf)
 {
 	int i, len;
 	char *p;
 
 	RANV_CHECK_INDEX(-1);
-	
+
 	down(&nvram_sem);
 	RANV_CHECK_VALID();
 
@@ -790,13 +790,13 @@ int nvram_getall(int index, char *buf)
 			return -1;
 		}
 		ret = snprintf(p, l, "%s=%s", fb[index].cache[i].name, fb[index].cache[i].value);
-		
+
 		p += l;
 	}
 	*p = '\0'; //ending null
 
 	up(&nvram_sem);
-	
+
 	return 0;
 }
 

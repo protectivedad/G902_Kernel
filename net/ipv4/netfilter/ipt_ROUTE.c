@@ -44,17 +44,17 @@ MODULE_DESCRIPTION("iptables ROUTE target module");
 
 /* Try to route the packet according to the routing keys specified in
  * route_info. Keys are :
- *  - ifindex : 
- *      0 if no oif preferred, 
+ *  - ifindex :
+ *      0 if no oif preferred,
  *      otherwise set to the index of the desired oif
  *  - route_info->gw :
  *      0 if no gateway specified,
  *      otherwise set to the next host to which the pkt must be routed
- * If success, skb->dev is the output device to which the packet must 
+ * If success, skb->dev is the output device to which the packet must
  * be sent and skb->dst is not NULL
  *
  * RETURN: -1 if an error occured
- *          1 if the packet was succesfully routed to the 
+ *          1 if the packet was succesfully routed to the
  *            destination desired
  *          0 if the kernel routing table could not route the packet
  *            according to the keys specified
@@ -75,20 +75,20 @@ static int route(struct sk_buff *skb,
 				.tos = RT_TOS(iph->tos),
 				.scope = RT_SCOPE_UNIVERSE,
 			}
-		} 
+		}
 	};
-	
+
 	/* The destination address may be overloaded by the target */
 	if (route_info->gw)
 		fl.fl4_dst = route_info->gw;
-	
+
 	/* Trying to route the packet using the standard routing table. */
 	if ((err = ip_route_output_key(&init_net, &rt, &fl))) {
-		if (net_ratelimit()) 
+		if (net_ratelimit())
 			DEBUGP("ipt_ROUTE: couldn't route pkt (err: %i)",err);
 		return -1;
 	}
-	
+
 	/* Drop old route. */
 	dst_release(skb_dst(skb));
 	skb_dst_set(skb, NULL);
@@ -103,8 +103,8 @@ static int route(struct sk_buff *skb,
 		return 1;
 	}
 
-	if (net_ratelimit()) 
-		DEBUGP("ipt_ROUTE: failed to route as desired gw=%u.%u.%u.%u oif=%i (got oif=%i)\n", 
+	if (net_ratelimit())
+		DEBUGP("ipt_ROUTE: failed to route as desired gw=%u.%u.%u.%u oif=%i (got oif=%i)\n",
 		       NIPQUAD(route_info->gw), ifindex, rt->dst.dev->ifindex);
 	return 0;
 }
@@ -160,7 +160,7 @@ static void ip_direct_send(struct sk_buff *skb)
 
 
 /* PRE : skb->dev is set to the device we are leaving by
- * POST: - the packet is directly sent to the skb->dev device, without 
+ * POST: - the packet is directly sent to the skb->dev device, without
  *         pushing the link layer header.
  *       - the packet is destroyed
  */
@@ -171,7 +171,7 @@ static inline int dev_direct_send(struct sk_buff *skb)
 
 
 static unsigned int route_oif(const struct ipt_route_target_info *route_info,
-			      struct sk_buff *skb) 
+			      struct sk_buff *skb)
 {
 	unsigned int ifindex = 0;
 	struct net_device *dev_out = NULL;
@@ -183,7 +183,7 @@ static unsigned int route_oif(const struct ipt_route_target_info *route_info,
 		ifindex = dev_out->ifindex;
 	} else {
 		/* Unknown interface name : packet dropped */
-		if (net_ratelimit()) 
+		if (net_ratelimit())
 			DEBUGP("ipt_ROUTE: oif interface %s not found\n", route_info->oif);
 		return NF_DROP;
 	}
@@ -203,7 +203,7 @@ static unsigned int route_oif(const struct ipt_route_target_info *route_info,
 		if (route_info->flags & IPT_ROUTE_CONTINUE)
 			return NF_DROP;
 
-		if (net_ratelimit()) 
+		if (net_ratelimit())
 			DEBUGP("ipt_ROUTE: forcing the use of %i\n",
 			       ifindex);
 
@@ -215,14 +215,14 @@ static unsigned int route_oif(const struct ipt_route_target_info *route_info,
 		 */
 		if ((dev_out->type != ARPHRD_TUNNEL)
 		    && (dev_out->type != ARPHRD_IPGRE)) {
-			if (net_ratelimit()) 
+			if (net_ratelimit())
 				DEBUGP("ipt_ROUTE: can't guess the hw addr !\n");
 			dev_put(dev_out);
 			return NF_DROP;
 		}
-	
+
 		/* Send the packet. This will also free skb
-		 * Do not go through the POST_ROUTING hook because 
+		 * Do not go through the POST_ROUTING hook because
 		 * skb->dst is not set and because it will probably
 		 * get confused by the destination IP address.
 		 */
@@ -230,7 +230,7 @@ static unsigned int route_oif(const struct ipt_route_target_info *route_info,
 		dev_direct_send(skb);
 		dev_put(dev_out);
 		return NF_STOLEN;
-		
+
 	default:
 		/* Unexpected error */
 		dev_put(dev_out);
@@ -240,13 +240,13 @@ static unsigned int route_oif(const struct ipt_route_target_info *route_info,
 
 
 static unsigned int route_iif(const struct ipt_route_target_info *route_info,
-			      struct sk_buff *skb) 
+			      struct sk_buff *skb)
 {
 	struct net_device *dev_in = NULL;
 
 	/* Getting the current interface index. */
 	if (!(dev_in = dev_get_by_name(&init_net, route_info->iif))) {
-		if (net_ratelimit()) 
+		if (net_ratelimit())
 			DEBUGP("ipt_ROUTE: iif interface %s not found\n", route_info->iif);
 		return NF_DROP;
 	}
@@ -262,7 +262,7 @@ static unsigned int route_iif(const struct ipt_route_target_info *route_info,
 
 
 static unsigned int route_gw(const struct ipt_route_target_info *route_info,
-			     struct sk_buff *skb) 
+			     struct sk_buff *skb)
 {
 	if (route(skb, 0, route_info)!=1)
 		return NF_DROP;
@@ -293,7 +293,7 @@ static unsigned int ipt_route_target (struct sk_buff *skb,
 		/* Loopback - a packet we already routed, is to be
 		 * routed another time. Avoid that, now.
 		 */
-		if (net_ratelimit()) 
+		if (net_ratelimit())
 			DEBUGP(KERN_DEBUG "ipt_ROUTE: loopback - DROP!\n");
 		return NF_DROP;
 	}
@@ -319,7 +319,7 @@ static unsigned int ipt_route_target (struct sk_buff *skb,
 							  RT_SCOPE_LINK :
 							  RT_SCOPE_UNIVERSE)
 					}
-				} 
+				}
 			};
 
 			if (ip_route_output_key(&init_net, &rt, &fl)) {
@@ -331,9 +331,9 @@ static unsigned int ipt_route_target (struct sk_buff *skb,
 				dst_release(skb_dst(skb));
 				skb_dst_set(skb, &rt->dst);
 
-				/* this will traverse normal stack, and 
+				/* this will traverse normal stack, and
 				 * thus call conntrack on the icmp packet */
-				icmp_send(skb, ICMP_TIME_EXCEEDED, 
+				icmp_send(skb, ICMP_TIME_EXCEEDED,
 					  ICMP_EXC_TTL, 0);
 			}
 
@@ -362,13 +362,13 @@ static unsigned int ipt_route_target (struct sk_buff *skb,
 		 */
 		skb = pskb_copy(skb, GFP_ATOMIC);
 		if (!skb) {
-			if (net_ratelimit()) 
+			if (net_ratelimit())
 				DEBUGP(KERN_DEBUG "ipt_ROUTE: copy failed!\n");
 			return IPT_CONTINUE;
 		}
 	}
 
-	/* Tell conntrack to forget this packet since it may get confused 
+	/* Tell conntrack to forget this packet since it may get confused
 	 * when a packet is leaving with dst address == our address.
 	 * Good idea ? Dunno. Need advice.
 	 *
@@ -389,7 +389,7 @@ static unsigned int ipt_route_target (struct sk_buff *skb,
 	} else if (route_info->gw) {
 		res = route_gw(route_info, skb);
 	} else {
-		if (net_ratelimit()) 
+		if (net_ratelimit())
 			DEBUGP(KERN_DEBUG "ipt_ROUTE: no parameter !\n");
 		res = IPT_CONTINUE;
 	}
@@ -407,7 +407,7 @@ static int ipt_route_checkentry(const struct xt_tgchk_param *par)
 }
 
 
-static struct xt_target xt_route_reg = { 
+static struct xt_target xt_route_reg = {
 	.name = "ROUTE",
 	.target = ipt_route_target,
 	.family     = AF_INET,

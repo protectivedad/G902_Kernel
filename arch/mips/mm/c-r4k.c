@@ -526,7 +526,7 @@ static inline void local_r4k_flush_cache_page(void *args)
 			dontflash = 1;
 		} else
 			if (map_coherent || !cpu_has_ic_aliases)
-				r4k_blast_icache_page(addr);
+			r4k_blast_icache_page(addr);
 	}
 
 	if (vaddr) {
@@ -1091,10 +1091,10 @@ static void __cpuinit probe_pcache(void)
 	c->icache.ways = 1;
 #endif
 
-	printk("Primary instruction cache %ldkB, %s, %s, %slinesize %d bytes.\n",  
+	printk("Primary instruction cache %ldkB, %s, %s, %slinesize %d bytes.\n",
 	       icache_size >> 10,
 	       c->icache.flags & MIPS_CACHE_VTAG ? "VIVT" : "VIPT",
-	       (c->icache.flags & MIPS_CACHE_ALIASES) ?  "I-cache aliases, " : "",   
+	       (c->icache.flags & MIPS_CACHE_ALIASES) ?  "I-cache aliases, " : "",
 	       way_string[c->icache.ways], c->icache.linesz);
 
 	printk("Primary data cache %ldkB, %s, %s, %s, linesize %d bytes\n",

@@ -11,7 +11,7 @@ static struct at24_platform_data at24_config = {
 };
 
 static struct i2c_board_info i2c_info[] __initconst =  {
-	{	
+	{
 		I2C_BOARD_INFO("24c01", 0x50),
 		.platform_data	= &at24_config,
 	},

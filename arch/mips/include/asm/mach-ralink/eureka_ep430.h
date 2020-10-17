@@ -91,7 +91,7 @@
 #define RALINK_PCI_ARBCTL 		*(volatile u32 *)(RALINK_PCI_BASE + 0x0080)
 
 /*
-PCI0 --> PCI 
+PCI0 --> PCI
 PCI1 --> PCIe
 */
 #define RT3883_PCI_OFFSET	0x1000
@@ -122,7 +122,7 @@ PCI1 --> PCIe
 #define RALINK_PCI_ARBCTL 		*(volatile u32 *)(RALINK_PCI_BASE + 0x0080)
 
 /*
-PCI0 --> PCIe 0 
+PCI0 --> PCIe 0
 PCI1 --> PCIe 1
 */
 #define RT6855_PCIE0_OFFSET	0x2000
@@ -160,7 +160,7 @@ PCI1 --> PCIe 1
 #define RALINK_PCI_ARBCTL 		*(volatile u32 *)(RALINK_PCI_BASE + 0x0080)
 
 /*
-PCI0 --> PCIe 0 
+PCI0 --> PCIe 0
 PCI1 --> PCIe 1
 PCI2 --> PCIe 2
 */
@@ -198,7 +198,7 @@ PCI2 --> PCIe 2
 #define RALINK_PCIEPHY_P0P1_CTL_OFFSET	(RALINK_PCI_BASE + 0x9000)
 #define RALINK_PCIEPHY_P2_CTL_OFFSET	(RALINK_PCI_BASE + 0xA000)
 
-#elif defined(CONFIG_RALINK_RT3052) || defined(CONFIG_RALINK_RT3352) || defined(CONFIG_RALINK_RT5350) 
+#elif defined(CONFIG_RALINK_RT3052) || defined(CONFIG_RALINK_RT3352) || defined(CONFIG_RALINK_RT5350)
 #else
 #error "undefined in PCI"
 #endif

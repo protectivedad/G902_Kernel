@@ -102,7 +102,7 @@ void amon_cpu_dead(void)
 	launch->flags = LAUNCH_FREADY;
 
 	cpufreq =  mips_cpu_feq;
-	
+
 	__asm__ __volatile__ (
 	"	.set	push\n\t"
 	"	.set	noreorder\n\t"

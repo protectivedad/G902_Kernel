@@ -94,5 +94,5 @@ void  __init prom_init_cmdline(void)
 	if (cp != &(arcs_cmdline[0])) /* get rid of trailing space */
 	    --cp;
 	*cp = '\0';
-	
+
 }

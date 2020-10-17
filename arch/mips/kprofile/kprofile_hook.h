@@ -2,7 +2,7 @@
 #define __KPROFILE_HOOK_H
 
 extern void (*profilingSetupHook)(unsigned int tbl_size);
-extern void (*profilingEventHook)(unsigned int cntr, unsigned int event, unsigned int count, 
+extern void (*profilingEventHook)(unsigned int cntr, unsigned int event, unsigned int count,
 						unsigned int kernel, unsigned int user, unsigned int exl);
 extern void (*profilingStartHook)(void);
 extern void (*profilingStopHook)(void);
@@ -14,7 +14,7 @@ static inline void kprofileSetup(unsigned int tbl_size)
 		profilingSetupHook(tbl_size);
 }
 
-static inline void kprofileEvent(unsigned int cntr, unsigned int event, unsigned int count, 
+static inline void kprofileEvent(unsigned int cntr, unsigned int event, unsigned int count,
 						unsigned int kernel, unsigned int user, unsigned int exl)
 {
 	if (profilingEventHook)

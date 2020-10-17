@@ -30,7 +30,7 @@
 *************************************************************************
 */
 extern void profilingSetup(unsigned int tbl_size);
-extern void profilingEvent(unsigned int cntr, unsigned int event, unsigned int count, 
+extern void profilingEvent(unsigned int cntr, unsigned int event, unsigned int count,
 						unsigned int kernel, unsigned int user, unsigned int exl);
 extern void profilingStart(void);
 extern void profilingStop(void);

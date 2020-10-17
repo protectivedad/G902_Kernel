@@ -53,7 +53,7 @@
 
 #define SYSCFG      RALINK_SYSCTL_BASE + 0x10  /* System Configuration Register */
 #define SYSCFG1     RALINK_SYSCTL_BASE + 0x14  /* System Configuration Register1 */
-#define GPIOMODE    RALINK_SYSCTL_BASE + 0x60  
+#define GPIOMODE    RALINK_SYSCTL_BASE + 0x60
 #define CLKCFG      RALINK_SYSCTL_BASE + 0x30  /* Clock Configuration Register */
 #define RSTSTAT     RALINK_SYSCTL_BASE + 0x38
 #define TMRSTAT     (RALINK_TIMER_BASE)  /* Timer Status Register */

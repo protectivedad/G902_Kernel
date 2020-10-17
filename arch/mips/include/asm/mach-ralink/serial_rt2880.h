@@ -202,7 +202,7 @@
 
 //#define UART_LCR	3	/* Out: Line Control Register */
 /*
- * Note: if the word length is 5 bits (UART_LCR_WLEN5), then setting 
+ * Note: if the word length is 5 bits (UART_LCR_WLEN5), then setting
  * UART_LCR_STOP will select 1.5 stop bits, not 2 stop bits.
  */
 #define UART_LCR_DLAB		0x80 /* Divisor latch access bit */

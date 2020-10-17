@@ -110,6 +110,7 @@ int __init init_r4k_clocksource(void)
 
 	/* Calculate a somewhat reasonable rating value */
 	clocksource_mips.rating = 200 + mips_hpt_frequency / 10000000;
+
 	clocksource_set_clock(&clocksource_mips, mips_hpt_frequency);
 #ifdef CONFIG_MET
 	setup_hres_sched_clock(mips_hpt_frequency);

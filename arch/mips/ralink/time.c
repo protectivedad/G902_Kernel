@@ -96,11 +96,12 @@ static struct clocksource ra_systick_clocksource = {
 int __init ra_systick_clocksource_init(void)
 {
 	ra_systick_clocksource.rating = 350;
+
 #if LINUX_VERSION_CODE > KERNEL_VERSION(3,10,13)
 	clocksource_register_hz(&ra_systick_clocksource, 50000);
 #else
-    clocksource_set_clock(&ra_systick_clocksource, 50000);
-    clocksource_register(&ra_systick_clocksource);
+	clocksource_set_clock(&ra_systick_clocksource, 50000);
+	clocksource_register(&ra_systick_clocksource);
 #endif    
 
 	return 0;
@@ -182,7 +183,7 @@ void ra_systick_event_broadcast(const struct cpumask *mask)
 	 * The IPI VPE sender writes the signal bit to RALINK_TESTSTAT register.
 	 * So the receiver VPEs can judge "ipi_call" or "broadcast" event by
 	 * RALINK_TESTSTAT register when receiving ipi_call interrupt.
-	 * 
+	 *
 	 * Using spin_lock() to prevent other VPEs from accessing RALINK_TESTSTAT
 	 * register at the same time.
 	 */
@@ -223,7 +224,7 @@ int __init ra_systick_clockevent_init(void)
 	cd->min_delta_ns        = clockevent_delta2ns(0x3, cd);
 #ifdef CONFIG_RALINK_MT7621
 	/* must be lower than MIPS original cd rating(300) to activate "broadcast mode" */
-	cd->rating              = 250; 
+	cd->rating              = 250;
 #else
 	/* must be higher than MIPS original cd rating(300). */
 	cd->rating              = 350;
@@ -321,7 +322,7 @@ static int udelay_recal(void)
 device_initcall(udelay_recal);
 #endif	/* CONFIG_RALINK_MT7621 */
 
-u32 get_surfboard_sysclk(void) 
+u32 get_surfboard_sysclk(void)
 {
 	return surfboard_sysclk;
 }
@@ -337,4 +338,3 @@ void __init plat_time_init(void)
 }
 
 EXPORT_SYMBOL(get_surfboard_sysclk);
-

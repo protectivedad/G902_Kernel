@@ -201,7 +201,7 @@ void set_wdg_timer_ebl(unsigned int timer, unsigned int ebl)
             //result |= (0x1<<21); //REFCLK0
         }
         sysRegWrite(GPIOMODE,result);
-       
+
         //reset output low period is 100us
 	result=sysRegRead(RSTSTAT);
 	result &= ~(0x3FFF);
@@ -209,7 +209,7 @@ void set_wdg_timer_ebl(unsigned int timer, unsigned int ebl)
 	sysRegWrite(RSTSTAT, result);
     }
 #endif
-#endif 
+#endif
 }
 
 #if defined (CONFIG_RALINK_MT7621) || defined (CONFIG_RALINK_MT7628)
@@ -282,11 +282,11 @@ int32_t __init wdt_init_module(void)
     set_wdg_timer_mode(TMR1CTL,WATCHDOG);
 #if defined (CONFIG_RALINK_RT2880) || defined (CONFIG_RALINK_RT2883) || \
     defined (CONFIG_RALINK_RT3052) || defined (CONFIG_RALINK_RT3883)
-    /* 
+    /*
      * System Clock = CPU Clock/2
-     * For user easy configuration, We assume the unit of watch dog timer is 1s, 
+     * For user easy configuration, We assume the unit of watch dog timer is 1s,
      * so we need to calculate the TMR1LOAD value.
-     * Unit= 1/(SysClk/65536), 1 Sec = (SysClk)/65536 
+     * Unit= 1/(SysClk/65536), 1 Sec = (SysClk)/65536
      */
     set_wdg_timer_clock_prescale(TMR1CTL,SYS_CLK_DIV65536);
     wdg_load_value =  CONFIG_RALINK_WDG_TIMER * (get_surfboard_sysclk()/65536);

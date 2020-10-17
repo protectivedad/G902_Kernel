@@ -161,7 +161,7 @@ static inline void w_c0_ ## r ## n(unsigned int value)			\
 {									\
 	write_tc_c0_ ## r ## n(value);				\
 	return;							\
-}									
+}
 
 __define_perf_accessors(perfcntr, 0, 2)
 __define_perf_accessors(perfcntr, 1, 3)
@@ -247,7 +247,7 @@ static struct profiling_ctrl p_ctrl;
 DEFINE_SPINLOCK(log_lock);
 
 unsigned int tbl_size;
-	
+
 volatile unsigned int g_calibrate;
 volatile unsigned int g_regs[8];
 
@@ -352,11 +352,11 @@ static void mips_profiling_start(void)
 	int vpflags;
 	int tc;
 
-	//vpflags = dvpe();	
-	for (tc = 0; tc < NR_CPUS; tc++) { 
-		preempt_disable(); 
-		settc(tc); 
-		switch (num_counters) { 
+	//vpflags = dvpe();
+	for (tc = 0; tc < NR_CPUS; tc++) {
+		preempt_disable();
+		settc(tc);
+		switch (num_counters) {
 		case 4:
 			w_c0_perfctrl3(WHAT(tc) | reg_cfg.control[3]);
 			w_c0_perfcntr3(reg_cfg.counter[3]);
@@ -380,11 +380,11 @@ static void mips_profiling_stop(void)
 	int vpflags;
 	int tc;
 
-	//vpflags = dvpe();	
-	for (tc = 0; tc < NR_CPUS; tc++) { 
-		preempt_disable(); 
-		settc(tc); 
-		switch (num_counters) { 
+	//vpflags = dvpe();
+	for (tc = 0; tc < NR_CPUS; tc++) {
+		preempt_disable();
+		settc(tc);
+		switch (num_counters) {
 		case 4:
 			w_c0_perfctrl3(0);
 		case 3:
@@ -402,7 +402,7 @@ static void mips_profiling_stop(void)
 /*______________________________________________________________________________
 **  profilingSetup
 **
-**  descriptions: 
+**  descriptions:
 **  execution sequence:
 **  commands process:
 **  parameters:
@@ -428,7 +428,7 @@ void profilingSetup(unsigned int tbl_size)
 			memset(p_log, 0, p_ctrl.size * sizeof(struct profiling_log));
 	}
 
-	if (p_log == NULL) 
+	if (p_log == NULL)
 		p_ctrl.enabled = 0;
 }
 EXPORT_SYMBOL(profilingSetup);
@@ -436,7 +436,7 @@ EXPORT_SYMBOL(profilingSetup);
 /*______________________________________________________________________________
 **  profilingEvent
 **
-**  descriptions: 
+**  descriptions:
 **  execution sequence:
 **  commands process:
 **  parameters:
@@ -446,7 +446,7 @@ EXPORT_SYMBOL(profilingSetup);
 **  called by:
 **  call:
 **____________________________________________________________________________*/
-void profilingEvent(unsigned int cntr, unsigned int event, unsigned int count, 
+void profilingEvent(unsigned int cntr, unsigned int event, unsigned int count,
 						unsigned int kernel, unsigned int user, unsigned int exl)
 {
 	if (cntr < num_counters) {
@@ -462,7 +462,7 @@ EXPORT_SYMBOL(profilingEvent);
 /*______________________________________________________________________________
 **  profilingStart
 **
-**  descriptions: 
+**  descriptions:
 **  execution sequence:
 **  commands process:
 **  parameters:
@@ -485,7 +485,7 @@ EXPORT_SYMBOL(profilingStart);
 /*______________________________________________________________________________
 **  profilingStop
 **
-**  descriptions: 
+**  descriptions:
 **  execution sequence:
 **  commands process:
 **  parameters:
@@ -506,7 +506,7 @@ EXPORT_SYMBOL(profilingStop);
 /*______________________________________________________________________________
 **  profilingLog
 **
-**  descriptions: 
+**  descriptions:
 **  execution sequence:
 **  commands process:
 **  parameters:
@@ -543,7 +543,7 @@ EXPORT_SYMBOL(profilingLog);
 /*______________________________________________________________________________
 **  profilingDump
 **
-**  descriptions: 
+**  descriptions:
 **  execution sequence:
 **  commands process:
 **  parameters:
@@ -561,8 +561,8 @@ void profilingDump(void)
 
 	printk("Performance counters\n");
 	for (i = 0; i < num_counters; i++) {
-		printk("PerfCount%d=%d KERNEL=%d USER=%d EXL=%d\n", 
-				i, ctr_cfg[i].event, ctr_cfg[i].kernel, 
+		printk("PerfCount%d=%d KERNEL=%d USER=%d EXL=%d\n",
+				i, ctr_cfg[i].event, ctr_cfg[i].kernel,
 					ctr_cfg[i].user, ctr_cfg[i].exl);
 	}
 
@@ -582,7 +582,7 @@ void profilingDump(void)
 EXPORT_SYMBOL(profilingDump);
 
 /************************************************************************
-*                    C I     C O M M A N D S 
+*                    C I     C O M M A N D S
 *************************************************************************
 */
 static int do_kprofile(int argc, char *argv[], void *p);
@@ -689,7 +689,7 @@ static int do_kprofile_calibrate(int argc, char *argv[], void *p)
 	unsigned int start_inst_cnt;
 	unsigned int end_cycles_cnt;
 	unsigned int end_inst_cnt;
-	int i; 
+	int i;
 
 	volatile unsigned int val;
 	extern void __ICACHE_LOOP(void);
@@ -701,7 +701,7 @@ static int do_kprofile_calibrate(int argc, char *argv[], void *p)
 	start_cycles_cnt = r_c0_perfcntr0();
 	start_inst_cnt = r_c0_perfcntr1();
 	for (i = 0; i < 1000; i++)
-		__asm__ __volatile__("nop;"); 
+		__asm__ __volatile__("nop;");
 	end_cycles_cnt = r_c0_perfcntr0();
 	end_inst_cnt = r_c0_perfcntr1();
 	printk("Normal (nop)\n");
@@ -836,14 +836,14 @@ static int do_kprofile_calibrate(int argc, char *argv[], void *p)
 	start_inst_cnt = r_c0_perfcntr1();
 	for (i = 0; i < 1000; i++) {
 		cache_op(Hit_Invalidate_I, __ICACHE_LOOP);
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
 	}
 	end_cycles_cnt = r_c0_perfcntr0();
 	end_inst_cnt = r_c0_perfcntr1();
@@ -855,16 +855,16 @@ static int do_kprofile_calibrate(int argc, char *argv[], void *p)
 	start_inst_cnt = r_c0_perfcntr1();
 	for (i = 0; i < 1000; i++) {
 		cache_op(Hit_Invalidate_I, __ICACHE_LOOP);
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
 __asm__(" 	.globl __ICACHE_LOOP	\n"
 		"__ICACHE_LOOP:			\n");
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
-		__asm__ __volatile__("nop; nop; nop; nop;"); 
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
+		__asm__ __volatile__("nop; nop; nop; nop;");
 	}
 	end_cycles_cnt = r_c0_perfcntr0();
 	end_inst_cnt = r_c0_perfcntr1();
@@ -1089,7 +1089,7 @@ static unsigned int kprofileMemrl(unsigned int *ptr)
 	end_cycles_cnt = r_c0_perfcntr0();
 	end_inst_cnt = r_c0_perfcntr1();
 	printk("READ  %08x cycles=%d instructions=%d IPC=0.%02d\n", ptr,
-			end_cycles_cnt-start_cycles_cnt, end_inst_cnt-start_inst_cnt, 
+			end_cycles_cnt-start_cycles_cnt, end_inst_cnt-start_inst_cnt,
 			100*(end_inst_cnt-start_inst_cnt)/(end_cycles_cnt-start_cycles_cnt));
 
 	profilingStop();
@@ -1122,7 +1122,7 @@ static int kprofileMemwl(unsigned int *ptr, unsigned int val)
 	end_cycles_cnt = r_c0_perfcntr0();
 	end_inst_cnt = r_c0_perfcntr1();
 	printk("WRITE %08x cycles=%d instructions=%d IPC=0.%02d\n", ptr,
-			end_cycles_cnt-start_cycles_cnt, end_inst_cnt-start_inst_cnt, 
+			end_cycles_cnt-start_cycles_cnt, end_inst_cnt-start_inst_cnt,
 			100*(end_inst_cnt-start_inst_cnt)/(end_cycles_cnt-start_cycles_cnt));
 
 	profilingStop();
@@ -1333,7 +1333,7 @@ static int do_kprofile_test(int argc, char *argv[], void *p)
 	int tc;
 
 	profilingLog(0, 0);
-	//vpflags = dvpe();	
+	//vpflags = dvpe();
 	for (tc = 0; tc < NR_CPUS; tc++) {
 		preempt_disable();
 		settc(tc);

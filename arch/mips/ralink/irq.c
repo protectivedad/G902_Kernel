@@ -95,7 +95,7 @@ static unsigned long _gcmp_base;
  */
 static struct gic_intr_map gic_intr_map[GIC_NUM_INTRS] = {
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, //0
-        { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, 
+        { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI },
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, 
         { 0, GIC_CPU_INT3, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, //FE
         { 0, GIC_CPU_INT4, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, //PCIE0
@@ -111,8 +111,8 @@ static struct gic_intr_map gic_intr_map[GIC_NUM_INTRS] = {
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI },
 
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, //10
-        { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, 
-        { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, 
+        { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI },
+        { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI },
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI },
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI },
         { 0, GIC_CPU_INT0, GIC_POL_POS, GIC_TRIG_LEVEL, GIC_FLAG_IPI }, //15
@@ -387,7 +387,7 @@ void surfboard_hw0_irqdispatch(void)
 #if defined (CONFIG_RALINK_RT2880_SHUTTLE) ||   \
     defined (CONFIG_RALINK_RT2880_MP)
 	if (irq == 3) {
-#ifdef CONFIG_RALINK_GPIO 
+#ifdef CONFIG_RALINK_GPIO
 		/* cause gpio registered irq 7 (see rt2880gpio_init_irq()) */
 		irq = SURFBOARDINT_GPIO;
 		printk("surfboard_hw0_irqdispatch(): INT #7...\n");
@@ -396,19 +396,19 @@ void surfboard_hw0_irqdispatch(void)
 #endif
 	}
 #else
-	/* ILL_ACC */ 
+	/* ILL_ACC */
 	if (irq == 3) {
 		irq = SURFBOARDINT_ILL_ACC;
 	}
 #endif
 #if defined (CONFIG_RALINK_PCM) || defined (CONFIG_RALINK_PCM_MODULE)
-	/* PCM */ 
+	/* PCM */
 	if (irq == 4) {
 		irq = SURFBOARDINT_PCM;
 	}
 #endif
 
-	/* UARTF */ 
+	/* UARTF */
 	if (irq == 5) {
 		irq = SURFBOARDINT_UART;
 	}
@@ -447,6 +447,7 @@ void __init arch_init_irq(void)
         mips_cp0_status= mips_cp0_status& ~(CAUSEF_IP0|CAUSEF_IP1|CAUSEF_IP2|CAUSEF_IP3|CAUSEF_IP4|CAUSEF_IP5|CAUSEF_IP6|CAUSEF_IP7);
         write_32bit_cp0_register(CP0_STATUS, mips_cp0_status);
 #endif
+
 	mips_cpu_irq_init();
 
 #if defined (CONFIG_IRQ_GIC)
@@ -510,10 +511,8 @@ void __init arch_init_irq(void)
 	for (i = 0; i <= SURFBOARDINT_END; i++) {
 		set_irq_chip_and_handler(i, &surfboard_irq_type, handle_level_irq);
 	}
-
 	/* Enable global interrupt bit */
 	*(volatile u32 *)(RALINK_INTENA) = M_SURFBOARD_GLOBAL_INT;
-	
 	set_c0_status(ST0_IM);
 #endif // CONFIG_IRQ_GIC //
 
@@ -623,19 +622,19 @@ asmlinkage void rt_irq_dispatch(void)
 #if defined(CONFIG_RALINK_RT2880) || defined(CONFIG_RALINK_RT3883)
 			 pci_status = RALINK_PCI_PCIINT_ADDR;
 #endif
-			 if(pci_order ==0) { 
-#if defined(CONFIG_RT2880_ASIC) 
+			 if(pci_order ==0) {
+#if defined(CONFIG_RT2880_ASIC)
 				if(pci_status &0x40000)
-#elif defined(CONFIG_RT2880_FPGA) 
+#elif defined(CONFIG_RT2880_FPGA)
 				if(pci_status &0x80000)
 #endif
 					do_IRQ(2);
 				else // if(pci_status & 0x40000)
 					do_IRQ(15);
 			 } else {
-#if defined(CONFIG_RT2880_ASIC)  
+#if defined(CONFIG_RT2880_ASIC)
 				if(pci_status &0x80000)
-#elif defined(CONFIG_RT2880_FPGA) 
+#elif defined(CONFIG_RT2880_FPGA)
 				if(pci_status &0x40000)
 #endif
 					do_IRQ(15);
@@ -653,7 +652,7 @@ asmlinkage void rt_irq_dispatch(void)
 		irq--;
 		irq_x <<= 1;
 	}
-	
+
 	return;
 }
 #endif

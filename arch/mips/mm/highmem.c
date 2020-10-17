@@ -33,7 +33,7 @@ static inline int kmap_atomic_idx(void)
 static inline void kmap_atomic_idx_pop(void)
 {
        int idx __maybe_unused;
-       
+
        atomic_t *ptr = &(__get_cpu_var(__kmap_atomic_idx));
        idx = atomic_dec_return(ptr);
 

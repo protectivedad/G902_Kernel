@@ -4,7 +4,7 @@
 #include <linux/types.h>
 
 void (*profilingSetupHook)(unsigned int tbl_size) = NULL;
-void (*profilingEventHook)(unsigned int cntr, unsigned int event, unsigned int count, 
+void (*profilingEventHook)(unsigned int cntr, unsigned int event, unsigned int count,
 						unsigned int kernel, unsigned int user, unsigned int exl) = NULL;
 void (*profilingStartHook)(void) = NULL;
 void (*profilingStopHook)(void) = NULL;

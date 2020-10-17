@@ -50,7 +50,7 @@
 #include <asm/mach-ralink/surfboardint.h>
 #include <asm/time.h>
 #include <asm/traps.h>
-#include <asm/gcmpregs.h>  
+#include <asm/gcmpregs.h>
 
 #if defined(CONFIG_SERIAL_CONSOLE) || defined(CONFIG_PROM_CONSOLE)
 extern void console_setup(char *, int *);
